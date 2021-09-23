@@ -30,9 +30,9 @@ namespace RaceResultsBlazor.App.Data
         public int Points { get; }
 
         public string GetClasses()
-            => $"{(string.IsNullOrEmpty(this.Color) ? string.Empty : "team")}".Trim();
+            => $"{(string.IsNullOrWhiteSpace(this.Color) ? string.Empty : "team")}".Trim();
 
         public string GetColor()
-            => string.IsNullOrEmpty(this.Color) ? "#000000" : this.Color;
+            => string.IsNullOrWhiteSpace(this.Color) ? "#000000" : this.Color;
     }
 }
