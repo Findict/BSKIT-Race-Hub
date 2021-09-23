@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 namespace RaceResultsBlazor.App.Data
 {
@@ -17,5 +18,8 @@ namespace RaceResultsBlazor.App.Data
         public List<DriverResult> Results { get; set; }
 
         public int TotalPoints { get; set; }
+
+        public bool HasValidCountry
+            => File.Exists($"wwwroot\\{this.CountryFlag}");
     }
 }
