@@ -45,4 +45,9 @@ else
     {
         results = await ResultsService.GetTeamResultsAsync(Title);
     }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        results = await ResultsService.GetTeamResultsAsync(Title);
+    }
 }

@@ -55,4 +55,9 @@ else
     {
         results = await ResultsService.GetDriverResultsAsync(Title);
     }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        results = await ResultsService.GetDriverResultsAsync(Title);
+    }
 }
