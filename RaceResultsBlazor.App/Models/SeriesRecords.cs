@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using CsvHelper;
-using CsvHelper.Configuration;
 using RaceResultsBlazor.App.CsvModels;
+using ServiceStack.Text;
 
 namespace RaceResultsBlazor.App.Data
 {
@@ -70,16 +67,9 @@ namespace RaceResultsBlazor.App.Data
                 return null;
             }
 
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                Encoding = Encoding.UTF8,
-                MissingFieldFound = null
-            };
+            using var stream = File.OpenRead(file);
 
-            using var reader = new StreamReader(file, Encoding.UTF8);
-            using var csv = new CsvReader(reader, config);
-
-            return csv.GetRecords<T>().ToList();
+            return CsvSerializer.DeserializeFromStream<List<T>>(stream);
         }
 
         private static string CountryToAssetUrl(string country)
