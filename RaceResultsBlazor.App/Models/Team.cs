@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using RaceResultsBlazor.App.CsvModels;
 
 namespace RaceResultsBlazor.App.Data
@@ -34,5 +35,8 @@ namespace RaceResultsBlazor.App.Data
 
         public string GetColor()
             => string.IsNullOrWhiteSpace(this.Color) ? "#000000" : this.Color;
+
+        public bool HasValidCountry
+            => File.Exists($"wwwroot\\{this.Country}");
     }
 }

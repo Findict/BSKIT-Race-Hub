@@ -5,44 +5,44 @@
 
 @if (results == null)
 {
-    <p><em>Loading...</em></p>
+<p><em>Loading...</em></p>
 }
 else
 {
-    <div class="driver-table" >
-        <table>
-            <thead>
-                <tr>
-                    <th class="position-head"></th>
-                    <th class="driver-head">Driver</th>
-                    <th class="team-head">Team</th>
-                    @foreach (var flagUrl in results.RaceImagePaths)
+<div class="driver-table">
+    <table>
+        <thead>
+            <tr>
+                <th class="position-head"></th>
+                <th class="driver-head">Driver</th>
+                <th class="team-head">Team</th>
+                @foreach (var flagUrl in results.RaceImagePaths)
                     {
-                        <th class="track-flag-head"><img class="track-flag" src="@flagUrl" /></th>
+                <th class="track-flag-head"><img class="track-flag" src="@flagUrl" /></th>
                     }
-                    <th class="points-head totals">Pts</th>
-                </tr>
-            </thead>
+                <th class="points-head totals">Pts</th>
+            </tr>
+        </thead>
 
-            <tbody>
-                @foreach (var driverResult in results.DriverResults)
+        <tbody>
+            @foreach (var driverResult in results.DriverResults)
                 {
-                    <tr>
-                        <td class="position">@driverResult.Position</td>
-                        <td class="flagged-name">
-                            <span class="flagged-name-span">@driverResult.Name</span> <img class="driver-flag" src="@driverResult.CountryFlag" onerror="this.style.visibility='hidden'" />
-                        </td>
-                        <td class="@driverResult.Team.GetClasses()" style="border-color: @driverResult.Team.GetColor()">@driverResult.Team.Name</td>
-                        @foreach (var raceResult in driverResult.Results)
+            <tr>
+                <td class="position">@driverResult.Position</td>
+                <td class="flagged-name">
+                    <span class="flagged-name-span">@driverResult.Name</span> @if (@driverResult.HasValidCountry) { <img class="driver-flag" src="@driverResult.CountryFlag" /> }
+                </td>
+                <td class="@driverResult.Team.GetClasses()" style="border-color: @driverResult.Team.GetColor()">@driverResult.Team.Name</td>
+                @foreach (var raceResult in driverResult.Results)
                         {
-                            <td class="@raceResult.GetClasses()">@raceResult.Position</td>
+                <td class="@raceResult.GetClasses()">@raceResult.Position</td>
                         }
-                        <td class="totals">@driverResult.TotalPoints</td>
-                    </tr>
+                <td class="totals">@driverResult.TotalPoints</td>
+            </tr>
                 }
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>
 }
 
 @code {
@@ -52,6 +52,11 @@ else
     public string Title { get; set; }
 
     protected override async Task OnInitializedAsync()
+    {
+        results = await ResultsService.GetDriverResultsAsync(Title);
+    }
+
+    protected override async Task OnParametersSetAsync()
     {
         results = await ResultsService.GetDriverResultsAsync(Title);
     }
