@@ -49,7 +49,8 @@ namespace RaceResultsBlazor.App.Data
                         Position = result,
                         IsFastestLap = r.Id == this.racesRecords.First(race => race.Number - 1 == index).Fastest
                     }).ToList()
-            }).OrderBy(d => d.Position)
+            }).Where(d => d.Results.Any(r => !string.IsNullOrEmpty(r.Position)) || d.Position == 1)
+            .OrderBy(d => d.Position)
             .ThenByDescending(d => d.Results.Count(r => !string.IsNullOrEmpty(r.Position)))
             .ToList();
         }
