@@ -20,6 +20,21 @@ namespace RaceResultsBlazor.App.Data
             }
         }
 
+        public async Task RefreshData()
+        {
+            seriesRecords.Clear();
+
+            var directories = Directory.GetDirectories("data")
+                .Select(d => d.Split('\\').Last());
+
+            foreach (var title in directories)
+            {
+                seriesRecords.Add(new SeriesRecords(title));
+            }
+
+            await OnDataRefreshed?.Invoke();
+        }
+
         public Task<DriverResultsViewModel> GetDriverResultsAsync(string title)
         {
             var series = seriesRecords.FirstOrDefault(s => s.Info.Title == title);
@@ -47,5 +62,14 @@ namespace RaceResultsBlazor.App.Data
 
         public Task<SeriesInfo[]> GetSeriesAsync()
             => Task.FromResult(this.seriesRecords.Select(r => r.Info).ToArray());
+
+        public void ResetSubscriptions()
+        {
+            this.OnDataRefreshed = null;
+        }
+
+        public delegate Task OnDataRefreshedHandler();
+
+        public event OnDataRefreshedHandler OnDataRefreshed;
     }
 }
