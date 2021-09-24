@@ -57,7 +57,7 @@ body {
     font-weight: 400;
     color: #fff;
     text-align: left;
-    background-color: #000
+    background-color: #0f0f0f
 }
 
 [tabindex="-1"]:focus {

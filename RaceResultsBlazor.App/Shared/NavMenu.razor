@@ -5,30 +5,30 @@
 
 <div>
     <div class="top-row">
-        <Button class="nav-item px-3" @onclick="@RefreshData"> <span class="oi oi-reload mr-2" /></Button>
+        <Button @onclick="@RefreshData"> <span class="oi oi-reload mr-2" /></Button>
     </div>
-    <ul class="nav card-columns">
-        @foreach (var serie in series)
-        {
-            <li class="nav-item px-3"><h4>@serie.Title</h4></li>
+    @foreach (var serie in series)
+    {
+    <div class="dropdown">
+        <a class="btn dropdown-toggle nav-btn" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @serie.Title
+        </a>
+        <div class="dropdown-menu nav-sub-menu" aria-labelledby="dropdownMenuButton">
             @if (serie.ContainsDriverResults)
             {
-                <li class="nav-item px-3">
-                    <NavLink class="nav-link" href="@serie.DriversLink">
-                        Drivers standings
-                    </NavLink>
-                </li>
+            <a class="dropdown-item nav-sub-menu-item" href="@serie.DriversLink">
+                Drivers standings
+            </a>
             }
             @if (serie.ContainsTeamResults)
             {
-                <li class="nav-item px-3">
-                    <NavLink class="nav-link" href="@serie.TeamsLink">
-                        Teams standings
-                    </NavLink>
-                </li>
+            <a class="nav-sub-menu-item dropdown-item" href="@serie.TeamsLink">
+                Teams standings
+            </a>
             }
-        }
-    </ul>
+        </div>
+    </div>
+    }
 </div>
 
 @code {
