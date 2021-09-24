@@ -6,6 +6,8 @@
 
         public string Country { get; set; }
 
+        public int Hpv { get; set; }
+
         public int Fastest { get; set; }
     }
 }
