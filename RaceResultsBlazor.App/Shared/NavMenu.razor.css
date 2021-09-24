@@ -7,6 +7,18 @@
     background-color: rgba(0,0,0,0.4);
 }
 
+button {
+    border: hidden;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    color: white;
+}
+
+button:hover {
+    background: #ffffff30
+}
+
 .navbar-brand {
     font-size: 1.1rem;
 }
@@ -34,10 +46,10 @@
     .nav-item ::deep a {
         color: #d7d7d7;
         border-radius: 4px;
-        height: 3rem;
+        height: 2rem;
         display: flex;
         align-items: center;
-        line-height: 3rem;
+        line-height: 2rem;
     }
 
 .nav-item ::deep a.active {

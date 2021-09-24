@@ -51,13 +51,16 @@ else
     [Parameter]
     public string Title { get; set; }
 
-    protected override async Task OnInitializedAsync()
-    {
-        results = await ResultsService.GetDriverResultsAsync(Title);
-    }
-
     protected override async Task OnParametersSetAsync()
     {
+        await this.UpdateData();
+        ResultsService.ResetSubscriptions();
+        ResultsService.OnDataRefreshed += this.UpdateData;
+    }
+
+    private async Task UpdateData()
+    {
         results = await ResultsService.GetDriverResultsAsync(Title);
+        this.StateHasChanged();
     }
 }

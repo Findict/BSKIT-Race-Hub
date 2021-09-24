@@ -2,10 +2,13 @@
 @inject ResultsService ResultsService
 
 <div>
+    <div class="top-row">
+        <Button class="nav-item px-3" @onclick="@RefreshData"> <span class="oi oi-reload mr-2" /></Button>
+    </div>
     <ul class="nav card-columns">
         @foreach (var serie in series)
         {
-            <li class="nav-item px-3 f"><h4>@serie.Title</h4></li>
+            <li class="nav-item px-3"><h4>@serie.Title</h4></li>
             @if (serie.ContainsDriverResults)
             {
                 <li class="nav-item px-3">
@@ -32,5 +35,10 @@
     protected override async Task OnInitializedAsync()
     {
         series = await ResultsService.GetSeriesAsync();
+    }
+
+    protected Task RefreshData()
+    {
+        return ResultsService.RefreshData();
     }
 }
