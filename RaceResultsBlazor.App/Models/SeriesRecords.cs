@@ -47,6 +47,7 @@ namespace RaceResultsBlazor.App.Data
                     .Select((result, index) => new DriverResult
                     {
                         Position = result,
+                        HighestPointsFinish = this.racesRecords.First(race => race.Number - 1 == index).Hpv,
                         IsFastestLap = r.Id == this.racesRecords.First(race => race.Number - 1 == index).Fastest
                     }).ToList()
             }).Where(d => d.Results.Any(r => !string.IsNullOrEmpty(r.Position)) || d.Position == 1)

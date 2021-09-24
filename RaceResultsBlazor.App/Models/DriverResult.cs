@@ -6,20 +6,28 @@
 
         public bool IsFastestLap { get; set; }
 
+        public int HighestPointsFinish { get; set; } = 3;
+
         public string GetClasses()
         {
             var classes = "result";
 
             if (int.TryParse(Position, out int pos))
             {
-                classes = pos switch
+                if (pos > this.HighestPointsFinish)
                 {
-                    1 => string.Join(' ', classes, "first"),
-                    2 => string.Join(' ', classes, "second"),
-                    3 => string.Join(' ', classes, "third"),
-                    4 or 5 or 6 or 7 or 8 or 9 or 10 => string.Join(' ', classes, "points"),
-                    _ => string.Join(' ', classes, "no-points"),
-                };
+                    classes = string.Join(' ', classes, "no-points");
+                }
+                else
+                {
+                    classes = pos switch
+                    {
+                        1 => string.Join(' ', classes, "first"),
+                        2 => string.Join(' ', classes, "second"),
+                        3 => string.Join(' ', classes, "third"),
+                        _ => string.Join(' ', classes, "points"),
+                    };
+                }
             }
             else if (!string.IsNullOrEmpty(Position))
             {
