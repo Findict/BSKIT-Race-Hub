@@ -2,7 +2,9 @@
 @inject ResultsService ResultsService
 
 <div>
-    <Button class="nav-item px-3" @onclick="@RefreshData">Refresh</Button>
+    <div class="top-row">
+        <Button class="nav-item px-3" @onclick="@RefreshData"> <span class="oi oi-reload mr-2" /></Button>
+    </div>
     <ul class="nav card-columns">
         @foreach (var serie in series)
         {

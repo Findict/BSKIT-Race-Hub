@@ -7,6 +7,18 @@
     background-color: rgba(0,0,0,0.4);
 }
 
+button {
+    border: hidden;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    color: white;
+}
+
+button:hover {
+    background: #ffffff30
+}
+
 .navbar-brand {
     font-size: 1.1rem;
 }
