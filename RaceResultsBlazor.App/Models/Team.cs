@@ -2,7 +2,7 @@
 using System.IO;
 using RaceResultsBlazor.App.CsvModels;
 
-namespace RaceResultsBlazor.App.Data
+namespace RaceResultsBlazor.App.Models
 {
     public class Team
     {

@@ -1,38 +1,39 @@
 ﻿@page "/teams/{title}"
 
-@using RaceResultsBlazor.App.Data
+@using RaceResultsBlazor.App.ViewModels
+@using RaceResultsBlazor.App.Services
 @inject ResultsService ResultsService
 
 @if (results == null)
 {
-    <p><em>Loading...</em></p>
+<p><em>Loading...</em></p>
 }
 else
 {
-    <div class="team-table">
-        <table>
-            <thead>
-                <tr>
-                    <th class="position-head"></th>
-                    <th class="driver-head">Team</th>
-                    <th class="points-head totals">Pts</th>
-                </tr>
-            </thead>
+<div class="team-table" style="background-image: url('@results.BackgroundPath')">
+    <table>
+        <thead>
+            <tr>
+                <th class="position-head"></th>
+                <th class="driver-head">Team</th>
+                <th class="points-head totals">Pts</th>
+            </tr>
+        </thead>
 
-            <tbody>
-                @foreach (var teamResult in results.TeamResults)
+        <tbody>
+            @foreach (var teamResult in results.TeamResults)
                 {
-                    <tr>
-                        <td class="position">@teamResult.Position</td>
-                        <td class="flagged-name @teamResult.GetClasses()" style="border-color: @teamResult.GetColor()">
-                            <span class="flagged-name-span">@teamResult.Name</span> @if (@teamResult.HasValidCountry) { <img class="driver-flag" src="@teamResult.Country" /> }
-                        </td>
-                        <td class="totals">@teamResult.Points</td>
-                    </tr>
+            <tr>
+                <td class="position">@teamResult.Position</td>
+                <td class="flagged-name @teamResult.GetClasses()" style="border-color: @teamResult.GetColor()">
+                    <span class="flagged-name-span">@teamResult.Name</span> @if (@teamResult.HasValidCountry) { <img class="driver-flag" src="@teamResult.Country" /> }
+                </td>
+                <td class="totals">@teamResult.Points</td>
+            </tr>
                 }
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>
 }
 
 @code {
