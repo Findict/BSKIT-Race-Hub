@@ -30,6 +30,32 @@ button:hover {
     top: -2px;
 }
 
+.nav-sub-menu {
+    background-color: #0f0f0f;
+    border-radius: 8px;
+    padding: 0px;
+}
+
+.nav-sub-menu-item {
+    color: #ffffff;
+    padding: .75rem 1.5rem;
+    border-radius: 8px;
+}
+
+.nav-sub-menu-item:hover {
+    background: #ffffff30;
+}
+
+.nav-btn {
+    padding: 8px;
+    margin: 8px;
+    width: -webkit-fill-available;
+}
+
+.nav-btn:hover {
+    background: #ffffff30;
+}
+
 .nav-item {
     font-size: 0.9rem;
     padding-bottom: 0.5rem;

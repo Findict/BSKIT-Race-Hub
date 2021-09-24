@@ -5,26 +5,26 @@
 
 <div>
     <div class="top-row">
-        <Button class="nav-item px-3" @onclick="@RefreshData"> <span class="oi oi-reload mr-2" /></Button>
+        <Button @onclick="@RefreshData"> <span class="oi oi-reload mr-2" /></Button>
     </div>
     @foreach (var serie in series)
     {
     <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <h5>@serie.Title</h5>
+        <a class="btn dropdown-toggle nav-btn" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @serie.Title
         </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-menu nav-sub-menu" aria-labelledby="dropdownMenuButton">
             @if (serie.ContainsDriverResults)
             {
-            <NavLink class="dropdown-item" href="@serie.DriversLink">
+            <a class="dropdown-item nav-sub-menu-item" href="@serie.DriversLink">
                 Drivers standings
-            </NavLink>
+            </a>
             }
             @if (serie.ContainsTeamResults)
             {
-            <NavLink class="dropdown-item" href="@serie.TeamsLink">
+            <a class="nav-sub-menu-item dropdown-item" href="@serie.TeamsLink">
                 Teams standings
-            </NavLink>
+            </a>
             }
         </div>
     </div>
