@@ -14,8 +14,13 @@ namespace RaceResultsBlazor.App.Services
 
         public ResultsService()
         {
+            this.GetSeriesData();
+        }
+
+        private void GetSeriesData()
+        {
             var directories = Directory.GetDirectories(@"wwwroot\data")
-                .Select(d => d.Split('\\').Last());
+                            .Select(d => d.Split('\\').Last());
 
             foreach (var title in directories)
             {
@@ -27,13 +32,7 @@ namespace RaceResultsBlazor.App.Services
         {
             seriesRecords.Clear();
 
-            var directories = Directory.GetDirectories("data")
-                .Select(d => d.Split('\\').Last());
-
-            foreach (var title in directories)
-            {
-                seriesRecords.Add(new SeriesRecords(title));
-            }
+            this.GetSeriesData();
 
             await OnDataRefreshed?.Invoke();
         }
