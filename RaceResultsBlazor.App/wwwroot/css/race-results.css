@@ -4,15 +4,14 @@
 }
 
 .driver-table {
-    background-image: url("/assets/drivers-bg.png");
-    height: 1080px;
-    width: 1920px;
+    background-size: cover;
+    height: 100%;
     display: flex;
     justify-content: center;
 }
 
 .team-table {
-    background-image: url("/assets/team-bg.png");
+    background-size: cover;
     height: 640px;
     width: 480px;
     display: flex;

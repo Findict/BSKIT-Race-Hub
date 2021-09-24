@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using RaceResultsBlazor.App.Models;
+using RaceResultsBlazor.App.ViewModels;
 
-namespace RaceResultsBlazor.App.Data
+namespace RaceResultsBlazor.App.Services
 {
     public class ResultsService
     {
@@ -11,8 +14,13 @@ namespace RaceResultsBlazor.App.Data
 
         public ResultsService()
         {
-            var directories = Directory.GetDirectories("data")
-                .Select(d => d.Split('\\').Last());
+            this.GetSeriesData();
+        }
+
+        private void GetSeriesData()
+        {
+            var directories = Directory.GetDirectories(@"wwwroot\data")
+                            .Select(d => d.Split('\\').Last());
 
             foreach (var title in directories)
             {
@@ -24,13 +32,7 @@ namespace RaceResultsBlazor.App.Data
         {
             seriesRecords.Clear();
 
-            var directories = Directory.GetDirectories("data")
-                .Select(d => d.Split('\\').Last());
-
-            foreach (var title in directories)
-            {
-                seriesRecords.Add(new SeriesRecords(title));
-            }
+            this.GetSeriesData();
 
             await OnDataRefreshed?.Invoke();
         }
@@ -41,6 +43,7 @@ namespace RaceResultsBlazor.App.Data
 
             var results = new DriverResultsViewModel
             {
+                BackgroundPath = $@"data/{title}/drivers-bg.png",
                 DriverResults = series.GetDriverResults(),
                 RaceImagePaths = series.GetRaceImages()
             };
@@ -54,6 +57,7 @@ namespace RaceResultsBlazor.App.Data
 
             var results = new TeamResultsViewModel
             {
+                BackgroundPath = $@"data/{title}/teams-bg.png",
                 TeamResults = series.GetTeamResults()
             };
 

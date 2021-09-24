@@ -1,4 +1,5 @@
-﻿@using RaceResultsBlazor.App.Data
+﻿@using RaceResultsBlazor.App.Services
+@using RaceResultsBlazor.App.Models
 @inject ResultsService ResultsService
 
 <div>
@@ -8,22 +9,22 @@
     <ul class="nav card-columns">
         @foreach (var serie in series)
         {
-            <li class="nav-item px-3"><h4>@serie.Title</h4></li>
-            @if (serie.ContainsDriverResults)
+        <li class="nav-item px-3"><h4>@serie.Title</h4></li>
+        @if (serie.ContainsDriverResults)
             {
-                <li class="nav-item px-3">
-                    <NavLink class="nav-link" href="@serie.DriversLink">
-                        Drivers standings
-                    </NavLink>
-                </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="@serie.DriversLink">
+                Drivers standings
+            </NavLink>
+        </li>
             }
-            @if (serie.ContainsTeamResults)
+        @if (serie.ContainsTeamResults)
             {
-            <li class="nav-item px-3">
-                <NavLink class="nav-link" href="@serie.TeamsLink">
-                    Teams standings
-                </NavLink>
-            </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="@serie.TeamsLink">
+                Teams standings
+            </NavLink>
+        </li>
             }
         }
     </ul>

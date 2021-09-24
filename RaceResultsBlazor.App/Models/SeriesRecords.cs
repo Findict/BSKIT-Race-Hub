@@ -5,7 +5,7 @@ using System.Text;
 using RaceResultsBlazor.App.CsvModels;
 using ServiceStack.Text;
 
-namespace RaceResultsBlazor.App.Data
+namespace RaceResultsBlazor.App.Models
 {
     public class SeriesRecords
     {

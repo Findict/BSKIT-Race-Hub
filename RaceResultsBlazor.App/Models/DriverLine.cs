@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace RaceResultsBlazor.App.Data
+namespace RaceResultsBlazor.App.Models
 {
     public class DriverLine
     {

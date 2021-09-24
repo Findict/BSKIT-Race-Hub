@@ -1,4 +1,4 @@
-﻿namespace RaceResultsBlazor.App.Data
+﻿namespace RaceResultsBlazor.App.Models
 {
     public class DriverResult
     {

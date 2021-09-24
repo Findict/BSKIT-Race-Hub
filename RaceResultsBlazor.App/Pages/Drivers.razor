@@ -1,6 +1,7 @@
 @page "/drivers/{title}"
 
-@using RaceResultsBlazor.App.Data
+@using RaceResultsBlazor.App.ViewModels
+@using RaceResultsBlazor.App.Services
 @inject ResultsService ResultsService
 
 @if (results == null)
@@ -9,7 +10,7 @@
 }
 else
 {
-<div class="driver-table">
+<div class="driver-table" style="background-image: url(@results.BackgroundPath)">
     <table>
         <thead>
             <tr>
@@ -18,7 +19,7 @@ else
                 <th class="team-head">Team</th>
                 @foreach (var flagUrl in results.RaceImagePaths)
                     {
-                <th class="track-flag-head"><img class="track-flag" src="@flagUrl" /></th>
+                        <th class="track-flag-head"><img class="track-flag" src="@flagUrl" /></th>
                     }
                 <th class="points-head totals">Pts</th>
             </tr>

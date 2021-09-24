@@ -36,6 +36,12 @@
     <None Include="wwwroot\assets\united-kingdom.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
+    <None Include="wwwroot\data\bcss_S2_AM\drivers-bg.png" />
+    <None Include="wwwroot\data\bcss_S2_AM\drivers.csv" />
+    <None Include="wwwroot\data\bcss_S2_AM\race-results.csv" />
+    <None Include="wwwroot\data\bcss_S2_AM\races.csv" />
+    <None Include="wwwroot\data\bcss_S2_AM\teams-bg.png" />
+    <None Include="wwwroot\data\bcss_S2_AM\teams.csv" />
   </ItemGroup>
 
   <ItemGroup>

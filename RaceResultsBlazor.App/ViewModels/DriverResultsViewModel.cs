@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using RaceResultsBlazor.App.Models;
 
-namespace RaceResultsBlazor.App.Data
+namespace RaceResultsBlazor.App.ViewModels
 {
     public class DriverResultsViewModel
     {

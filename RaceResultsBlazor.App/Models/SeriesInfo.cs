@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RaceResultsBlazor.App.Data
+namespace RaceResultsBlazor.App.Models
 {
     public class SeriesInfo
     {
@@ -40,15 +40,15 @@ namespace RaceResultsBlazor.App.Data
             => $"teams/{this.Title}";
 
         public string DriverLocation
-            => @$"data\{this.Title}\drivers.csv";
+            => @$"wwwroot\data\{this.Title}\drivers.csv";
 
         public string TeamsLocation
-            => @$"data\{this.Title}\teams.csv";
+            => @$"wwwroot\data\{this.Title}\teams.csv";
 
         public string RacesLocation
-            => @$"data\{this.Title}\races.csv";
+            => @$"wwwroot\data\{this.Title}\races.csv";
 
         public string RaceResultsLocation
-            => @$"data\{this.Title}\race-results.csv";
+            => @$"wwwroot\data\{this.Title}\race-results.csv";
     }
 }
