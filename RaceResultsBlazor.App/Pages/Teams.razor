@@ -45,8 +45,6 @@ else
     protected override async Task OnParametersSetAsync()
     {
         await this.UpdateData();
-        ResultsService.ResetSubscriptions();
-        ResultsService.OnDataRefreshed += this.UpdateData;
     }
 
     private async Task UpdateData()

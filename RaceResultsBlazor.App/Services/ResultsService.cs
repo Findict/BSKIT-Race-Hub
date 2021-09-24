@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,8 +32,6 @@ namespace RaceResultsBlazor.App.Services
             seriesRecords.Clear();
 
             this.GetSeriesData();
-
-            await OnDataRefreshed?.Invoke();
         }
 
         public Task<DriverResultsViewModel> GetDriverResultsAsync(string title)
@@ -66,14 +63,5 @@ namespace RaceResultsBlazor.App.Services
 
         public Task<SeriesInfo[]> GetSeriesAsync()
             => Task.FromResult(this.seriesRecords.Select(r => r.Info).ToArray());
-
-        public void ResetSubscriptions()
-        {
-            this.OnDataRefreshed = null;
-        }
-
-        public delegate Task OnDataRefreshedHandler();
-
-        public event OnDataRefreshedHandler OnDataRefreshed;
     }
 }
