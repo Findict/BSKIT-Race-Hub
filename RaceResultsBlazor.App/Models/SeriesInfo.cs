@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace RaceResultsBlazor.App.Models
+﻿namespace RaceResultsBlazor.App.Models
 {
     public class SeriesInfo
     {
@@ -9,9 +7,10 @@ namespace RaceResultsBlazor.App.Models
         private bool hasRaces;
         private bool hasRaceResults;
 
-        public SeriesInfo(string title)
+        public SeriesInfo(string name)
         {
-            this.Title = title;
+            this.Name = name;
+
         }
 
         public void UpdateStatus(bool hasDrivers, bool hasTeams, bool hasRaces, bool hasRaceResults)
@@ -22,7 +21,11 @@ namespace RaceResultsBlazor.App.Models
             this.hasRaces = hasRaces;
         }
 
+        public string Name { get; }
+
         public string Title { get; }
+
+        public int Index { get; }
 
         public bool ContainsDriverStandings
             => hasDrivers;
@@ -34,21 +37,21 @@ namespace RaceResultsBlazor.App.Models
             => hasTeams;
 
         public string DriversLink
-            => $"drivers/{this.Title}";
+            => $"drivers/{this.Name}";
 
         public string TeamsLink
-            => $"teams/{this.Title}";
+            => $"teams/{this.Name}";
 
         public string DriverLocation
-            => @$"wwwroot\data\{this.Title}\drivers.csv";
+            => @$"wwwroot\data\{this.Name}\drivers.csv";
 
         public string TeamsLocation
-            => @$"wwwroot\data\{this.Title}\teams.csv";
+            => @$"wwwroot\data\{this.Name}\teams.csv";
 
         public string RacesLocation
-            => @$"wwwroot\data\{this.Title}\races.csv";
+            => @$"wwwroot\data\{this.Name}\races.csv";
 
         public string RaceResultsLocation
-            => @$"wwwroot\data\{this.Title}\race-results.csv";
+            => @$"wwwroot\data\{this.Name}\race-results.csv";
     }
 }

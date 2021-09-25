@@ -27,16 +27,18 @@ namespace RaceResultsBlazor.App.Services
             }
         }
 
-        public async Task RefreshData()
+        public Task RefreshData()
         {
             seriesRecords.Clear();
 
             this.GetSeriesData();
+
+            return Task.CompletedTask;
         }
 
         public Task<DriverResultsViewModel> GetDriverResultsAsync(string title)
         {
-            var series = seriesRecords.FirstOrDefault(s => s.Info.Title == title);
+            var series = seriesRecords.FirstOrDefault(s => s.Info.Name == title);
 
             var results = new DriverResultsViewModel
             {
@@ -50,7 +52,7 @@ namespace RaceResultsBlazor.App.Services
 
         public Task<TeamResultsViewModel> GetTeamResultsAsync(string title)
         {
-            var series = seriesRecords.FirstOrDefault(s => s.Info.Title == title);
+            var series = seriesRecords.FirstOrDefault(s => s.Info.Name == title);
 
             var results = new TeamResultsViewModel
             {

@@ -5,6 +5,12 @@
     <UserSecretsId>6d2be738-89d8-437a-a7c3-f80d8dd92ca3</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <ExcludeFoldersFromDeployment>
+      wwwroot\assets; wwwroot\data
+    </ExcludeFoldersFromDeployment>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Include="wwwroot\assets\austria.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
