@@ -64,6 +64,6 @@ namespace RaceResultsBlazor.App.Services
         }
 
         public Task<SeriesInfo[]> GetSeriesAsync()
-            => Task.FromResult(this.seriesRecords.Select(r => r.Info).ToArray());
+            => Task.FromResult(this.seriesRecords.Select(r => r.Info).OrderBy(r => r.Index).ToArray());
     }
 }
