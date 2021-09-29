@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using RaceResultsBlazor.App.CsvModels;
+using RaceResultsBlazor.App.DataModels;
 
 namespace RaceResultsBlazor.App.Models
 {

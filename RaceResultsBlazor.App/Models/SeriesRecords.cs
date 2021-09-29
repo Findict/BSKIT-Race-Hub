@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using RaceResultsBlazor.App.CsvModels;
-using ServiceStack.Text;
+using RaceResultsBlazor.App.DataModels;
+using RaceResultsBlazor.App.Helpers;
 
 namespace RaceResultsBlazor.App.Models
 {
@@ -19,10 +17,10 @@ namespace RaceResultsBlazor.App.Models
         {
             this.Info = new SeriesInfo(title);
 
-            this.driverRecords = GetCsvData<DriverCsvModel>(this.Info.DriverLocation);
-            this.teamsRecords = GetCsvData<TeamCsvModel>(this.Info.TeamsLocation);
-            this.racesRecords = GetCsvData<RaceCsvModel>(this.Info.RacesLocation);
-            this.raceResultsRecords = GetCsvData<RaceResultCsvModel>(this.Info.RaceResultsLocation);
+            this.driverRecords = DataFileHelper.GetCsvData<DriverCsvModel>(this.Info.DriverLocation);
+            this.teamsRecords = DataFileHelper.GetCsvData<TeamCsvModel>(this.Info.TeamsLocation);
+            this.racesRecords = DataFileHelper.GetCsvData<RaceCsvModel>(this.Info.RacesLocation);
+            this.raceResultsRecords = DataFileHelper.GetCsvData<RaceResultCsvModel>(this.Info.RaceResultsLocation);
 
             this.Info.UpdateStatus(this.driverRecords != null, this.teamsRecords != null, this.racesRecords != null, this.raceResultsRecords != null);
         }
@@ -62,17 +60,7 @@ namespace RaceResultsBlazor.App.Models
         public List<string> GetRaceImages()
             => this.racesRecords.Select(r => CountryToAssetUrl(r.Country)).ToList();
 
-        private static List<T> GetCsvData<T>(string file)
-        {
-            if (!File.Exists(file))
-            {
-                return null;
-            }
-
-            using var stream = File.OpenRead(file);
-
-            return CsvSerializer.DeserializeFromStream<List<T>>(stream);
-        }
+        
 
         private static string CountryToAssetUrl(string country)
             => $"assets/{country.ToLower().Trim().Replace(' ', '-')}.png";

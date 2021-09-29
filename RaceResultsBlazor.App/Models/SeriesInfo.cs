@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RaceResultsBlazor.App.DataModels;
+using RaceResultsBlazor.App.Helpers;
 
 namespace RaceResultsBlazor.App.Models
 {
@@ -9,9 +10,19 @@ namespace RaceResultsBlazor.App.Models
         private bool hasRaces;
         private bool hasRaceResults;
 
-        public SeriesInfo(string title)
+        public SeriesInfo(string name)
         {
-            this.Title = title;
+            this.Name = name;
+
+            var info = DataFileHelper.GetJsonData<SeriesInfoDataModel>(this.SeriesInfoLocation);
+
+            this.PopulateInfo(info);
+        }
+
+        private void PopulateInfo(SeriesInfoDataModel info)
+        {
+            this.Title = info.Title;
+            this.Index = info.Index;
         }
 
         public void UpdateStatus(bool hasDrivers, bool hasTeams, bool hasRaces, bool hasRaceResults)
@@ -22,7 +33,11 @@ namespace RaceResultsBlazor.App.Models
             this.hasRaces = hasRaces;
         }
 
-        public string Title { get; }
+        public string Name { get; }
+
+        public string Title { get; private set; }
+
+        public int Index { get; private set; }
 
         public bool ContainsDriverStandings
             => hasDrivers;
@@ -34,21 +49,24 @@ namespace RaceResultsBlazor.App.Models
             => hasTeams;
 
         public string DriversLink
-            => $"drivers/{this.Title}";
+            => $"drivers/{this.Name}";
 
         public string TeamsLink
-            => $"teams/{this.Title}";
+            => $"teams/{this.Name}";
 
         public string DriverLocation
-            => @$"wwwroot\data\{this.Title}\drivers.csv";
+            => @$"wwwroot\data\{this.Name}\drivers.csv";
 
         public string TeamsLocation
-            => @$"wwwroot\data\{this.Title}\teams.csv";
+            => @$"wwwroot\data\{this.Name}\teams.csv";
 
         public string RacesLocation
-            => @$"wwwroot\data\{this.Title}\races.csv";
+            => @$"wwwroot\data\{this.Name}\races.csv";
 
         public string RaceResultsLocation
-            => @$"wwwroot\data\{this.Title}\race-results.csv";
+            => @$"wwwroot\data\{this.Name}\race-results.csv";
+
+        public string SeriesInfoLocation
+            => @$"wwwroot\data\{this.Name}\info.json";
     }
 }
