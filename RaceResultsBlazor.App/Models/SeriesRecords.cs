@@ -39,14 +39,14 @@ namespace RaceResultsBlazor.App.Models
                 CountryFlag = CountryToAssetUrl(r.Country),
                 Position = r.Position,
                 TotalPoints = r.Points,
-                Results = this.raceResultsRecords.First(res => res.Driver == r.Id)
+                Results = this.raceResultsRecords.FirstOrDefault(res => res.Driver == r.Id)?
                     .GetRaceArray()
                     .Take(this.racesRecords.Count)
                     .Select((result, index) => new DriverResult
                     {
                         Position = result,
-                        HighestPointsFinish = this.racesRecords.First(race => race.Number - 1 == index).Hpv,
-                        IsFastestLap = r.Id == this.racesRecords.First(race => race.Number - 1 == index).Fastest
+                        HighestPointsFinish = this.racesRecords.FirstOrDefault(race => race.Number - 1 == index)?.Hpv ?? 0,
+                        IsFastestLap = r.Id == this.racesRecords.FirstOrDefault(race => race.Number - 1 == index)?.Fastest
                     }).ToList()
             }).Where(d => d.Results.Any(r => !string.IsNullOrEmpty(r.Position)) || d.Position == 1)
             .OrderBy(d => d.Position)
