@@ -63,6 +63,6 @@ namespace RaceResultsBlazor.App.Models
         
 
         private static string CountryToAssetUrl(string country)
-            => $"assets/{country.ToLower().Trim().Replace(' ', '-')}.png";
+            => $"assets/{country?.ToLower().Trim().Replace(' ', '-') ?? string.Empty}.png";
     }
 }

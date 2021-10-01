@@ -3,17 +3,16 @@
     margin: 0px;
 }
 
-.driver-table {
+.overview-table {
     background-size: cover;
     height: 100%;
     display: flex;
     justify-content: center;
 }
 
-.team-table {
+.team-overview-list {
     background-size: cover;
-    height: 640px;
-    width: 480px;
+    height: 100%;
     display: flex;
     justify-content: center;
 }

@@ -14,18 +14,24 @@
             @serie.Title
         </a>
         <div class="dropdown-menu nav-sub-menu" aria-labelledby="dropdownMenuButton">
-            @if (serie.ContainsDriverResults)
-            {
-            <a class="dropdown-item nav-sub-menu-item" href="@serie.DriversLink">
+        @if (serie.ContainsTeamInfo)
+        {
+            <a class="nav-sub-menu-item dropdown-item" href="@serie.TeamsInfoLink">
+                Teams info
+            </a>
+        }
+        @if (serie.ContainsDriverResults)
+        {
+            <a class="dropdown-item nav-sub-menu-item" href="@serie.DriversResultsLink">
                 Drivers standings
             </a>
-            }
-            @if (serie.ContainsTeamResults)
-            {
-            <a class="nav-sub-menu-item dropdown-item" href="@serie.TeamsLink">
+        }
+        @if (serie.ContainsTeamResults)
+        {
+            <a class="nav-sub-menu-item dropdown-item" href="@serie.TeamsResultsLink">
                 Teams standings
             </a>
-            }
+        }
         </div>
     </div>
     }
