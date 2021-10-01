@@ -23,6 +23,8 @@ namespace RaceResultsBlazor.App.Models
         {
             this.Title = info.Title;
             this.Index = info.Index;
+
+            this.PageOptions = new PageOptions(info.PageOptions);
         }
 
         public void UpdateStatus(bool hasDrivers, bool hasTeams, bool hasRaces, bool hasRaceResults)
@@ -39,20 +41,28 @@ namespace RaceResultsBlazor.App.Models
 
         public int Index { get; private set; }
 
+        public PageOptions PageOptions { get; private set; }
+
         public bool ContainsDriverStandings
             => hasDrivers;
 
         public bool ContainsDriverResults
-            => hasDrivers && hasRaceResults && hasRaces;
+            => !this.PageOptions.HideDriverResults && hasDrivers && hasRaceResults && hasRaces;
 
         public bool ContainsTeamResults
-            => hasTeams;
+            => !this.PageOptions.HideTeamsStandings && hasTeams;
 
-        public string DriversLink
-            => $"drivers/{this.Name}";
+        public bool ContainsTeamInfo
+            => !this.PageOptions.HideTeamsInfo && hasTeams && hasDrivers;
 
-        public string TeamsLink
-            => $"teams/{this.Name}";
+        public string DriversResultsLink
+            => $"series/{this.Name}/drivers/results";
+
+        public string TeamsResultsLink
+            => $"series/{this.Name}/teams/results";
+
+        public string TeamsInfoLink
+            => $"series/{this.Name}/teams";
 
         public string DriverLocation
             => @$"wwwroot\data\{this.Name}\drivers.csv";

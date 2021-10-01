@@ -1,0 +1,135 @@
+﻿* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.overview-table {
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.team-overview-list {
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    align-self: center;
+}
+
+td, th {
+    border-radius: 8px;
+    text-align: left;
+    padding: 4px 8px;
+    background-color: #000000e0;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.team-table td, .team-table th {
+    height: 32px;
+}
+
+.position-head {
+    width: 32px;
+    background-color: transparent;
+}
+
+.driver-head {
+}
+
+.team-head {
+}
+
+.points-head {
+    width: 36px;
+}
+
+.position {
+    text-align: center;
+    font-weight: bold;
+}
+
+.flagged-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 400px;
+    height: 32px;
+    padding: 0px;
+}
+
+.flagged-name-span {
+    padding: 0px 8px;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.driver-flag {
+    border-radius: 0px 8px 8px 0px;
+    height: 32px;
+    padding: 0px;
+    margin: 0px;
+    float: right;
+    display: inline;
+    -webkit-mask-image: -webkit-gradient(linear, left top, right top, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)));
+}
+
+.track-flag-head {
+    padding: 2px;
+}
+
+.track-flag {
+    height: 32px;
+    margin: 0px 0px -4px 0px;
+    border-radius: 6px;
+}
+
+.result {
+    text-align: center;
+    border: solid #000000b0 2px;
+}
+
+.first {
+    background-color: #bb9433;
+}
+
+.second {
+    background-color: #68707c;
+}
+
+.third {
+    background-color: #cd7f32;
+}
+
+.points {
+    background-color: #205020;
+}
+
+.no-points {
+    background-color: #14146a;
+}
+
+.other-result {
+    background-color: #000000;
+    font-size: small;
+}
+
+.totals {
+    text-align: right;
+}
+
+.fastest:after {
+    content: "F";
+    color: #e6e6e6;
+    font-size: 10px;
+    vertical-align: top;
+}
+
+.team {
+    border-style: solid;
+    border-width: 0px 0px 0px 8px;
+}

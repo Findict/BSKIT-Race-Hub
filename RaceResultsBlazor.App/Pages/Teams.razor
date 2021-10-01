@@ -1,43 +1,42 @@
-﻿@page "/teams/{title}"
+﻿@page "/series/{title}/teams"
 
 @using RaceResultsBlazor.App.ViewModels
 @using RaceResultsBlazor.App.Services
+@using System.Linq
 @inject ResultsService ResultsService
 
 @if (results == null)
 {
-<p><em>Loading...</em></p>
+    <p><em>Loading...</em></p>
 }
 else
 {
-<div class="team-table" style="background-image: url('@results.BackgroundPath')">
-    <table>
-        <thead>
-            <tr>
-                <th class="position-head"></th>
-                <th class="driver-head">Team</th>
-                <th class="points-head totals">Pts</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var teamResult in results.TeamResults)
-                {
-            <tr>
-                <td class="position">@teamResult.Position</td>
-                <td class="flagged-name @teamResult.GetClasses()" style="border-color: @teamResult.GetColor()">
-                    <span class="flagged-name-span">@teamResult.Name</span> @if (@teamResult.HasValidCountry) { <img class="driver-flag" src="@teamResult.Country" /> }
-                </td>
-                <td class="totals">@teamResult.Points</td>
-            </tr>
-                }
-        </tbody>
-    </table>
-</div>
+    <div class="team-list" style="background-image: url('@results.BackgroundPath')">
+    @foreach (var teamResult in results.TeamResults)
+    {
+        <div class="team-container" style="border-color: @teamResult.GetColor()">
+            <div class="team-name">
+                <span class="flagged-name-span">@teamResult.Name</span>
+                @if (teamResult.HasValidCountry) {<img class="team-flag" src="@teamResult.Country" />}
+            </div>
+            <div class="drivers">
+            @foreach (var driver in drivers.DriverResults.Where(d => d.Team.Name == teamResult.Name))
+            {
+                <div class="flagged-name">
+                    <span class="driver-number">@driver.Id</span>
+                    <span class="flagged-name-span">@driver.Name</span> 
+                    @if (@driver.HasValidCountry) {<img class="driver-flag" src="@driver.CountryFlag" />}
+                </div>
+            }
+            </div>
+        </div>
+    }
+    </div>
 }
 
 @code {
     private TeamResultsViewModel results;
+    private DriverResultsViewModel drivers;
 
     [Parameter]
     public string Title { get; set; }
@@ -50,6 +49,7 @@ else
     private async Task UpdateData()
     {
         results = await ResultsService.GetTeamResultsAsync(Title);
+        drivers = await ResultsService.GetDriverResultsAsync(Title);
         this.StateHasChanged();
     }
 }
