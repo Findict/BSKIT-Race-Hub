@@ -56,9 +56,8 @@
     display: flex;
     flex-basis: 45%;
     flex-grow: 1;
-    justify-content: space-between;
     align-items: center;
-    padding: 0px;
+    padding: 0px; 
     min-width: 225px;
     height: 32px;
     border-radius: 6px;

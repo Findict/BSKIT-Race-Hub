@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using RaceResultsBlazor.App.DataModels;
+using RaceResultsBlazor.Models.DataModels;
 
-namespace RaceResultsBlazor.App.Models
+namespace RaceResultsBlazor.Models.Models
 {
     public class Team
     {
@@ -26,9 +26,11 @@ namespace RaceResultsBlazor.App.Models
 
         public string Color { get; }
 
-        public int Position { get; }
+        public int Position { get; set; }
 
-        public int Points { get; }
+        public int Points { get; set; }
+
+        public int BestDriver { get; set; }
 
         public string GetClasses()
             => $"{(string.IsNullOrWhiteSpace(this.Color) ? string.Empty : "team")}".Trim();

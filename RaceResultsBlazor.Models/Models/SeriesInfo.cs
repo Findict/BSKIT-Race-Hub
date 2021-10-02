@@ -1,14 +1,15 @@
-﻿using RaceResultsBlazor.App.DataModels;
-using RaceResultsBlazor.App.Helpers;
+﻿using System.Collections.Generic;
+using System.Linq;
+using RaceResultsBlazor.Models.DataModels;
+using RaceResultsBlazor.Utils.Helpers;
 
-namespace RaceResultsBlazor.App.Models
+namespace RaceResultsBlazor.Models.Models
 {
     public class SeriesInfo
     {
         private bool hasDrivers;
         private bool hasTeams;
         private bool hasRaces;
-        private bool hasRaceResults;
 
         public SeriesInfo(string name)
         {
@@ -23,15 +24,17 @@ namespace RaceResultsBlazor.App.Models
         {
             this.Title = info.Title;
             this.Index = info.Index;
+            this.MaxRacesToCount = info.MaxRacesToCount ?? 999;
 
             this.PageOptions = new PageOptions(info.PageOptions);
+            this.ScoringMatrices = info.ScoringMatrices?.Select(m => new ScoringMatrix(m)).ToList() ?? new List<ScoringMatrix>();
+            this.CalculateTeamResults = info.CalculateTeamResults;
         }
 
-        public void UpdateStatus(bool hasDrivers, bool hasTeams, bool hasRaces, bool hasRaceResults)
+        public void UpdateStatus(bool hasDrivers, bool hasTeams, bool hasRaces)
         {
             this.hasDrivers = hasDrivers;
             this.hasTeams = hasTeams;
-            this.hasRaceResults = hasRaceResults;
             this.hasRaces = hasRaces;
         }
 
@@ -43,11 +46,17 @@ namespace RaceResultsBlazor.App.Models
 
         public PageOptions PageOptions { get; private set; }
 
+        internal List<ScoringMatrix> ScoringMatrices { get; private set; }
+
+        public int MaxRacesToCount { get; internal set; }
+
+        public bool CalculateTeamResults { get; private set; }
+
         public bool ContainsDriverStandings
             => hasDrivers;
 
         public bool ContainsDriverResults
-            => !this.PageOptions.HideDriverResults && hasDrivers && hasRaceResults && hasRaces;
+            => !this.PageOptions.HideDriverResults && hasDrivers && hasRaces;
 
         public bool ContainsTeamResults
             => !this.PageOptions.HideTeamsStandings && hasTeams;
