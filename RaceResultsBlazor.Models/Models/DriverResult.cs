@@ -1,12 +1,16 @@
-﻿namespace RaceResultsBlazor.App.Models
+﻿namespace RaceResultsBlazor.Models.Models
 {
     public class DriverResult
     {
+        public int DriverId { get; set; }
+
         public string Position { get; set; }
 
         public bool IsFastestLap { get; set; }
 
-        public int HighestPointsFinish { get; set; } = 3;
+        public bool IsPointsFinish { get; set; }
+
+        public bool ExcludeFromCountback { get; set; }
 
         public string GetClasses()
         {
@@ -14,7 +18,7 @@
 
             if (int.TryParse(Position, out int pos))
             {
-                if (pos > this.HighestPointsFinish)
+                if (!this.IsPointsFinish)
                 {
                     classes = string.Join(' ', classes, "no-points");
                 }

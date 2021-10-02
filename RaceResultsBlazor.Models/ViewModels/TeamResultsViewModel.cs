@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using RaceResultsBlazor.App.Models;
+using RaceResultsBlazor.Models.Models;
 
-namespace RaceResultsBlazor.App.ViewModels
+namespace RaceResultsBlazor.Models.ViewModels
 {
     public class TeamResultsViewModel
     {

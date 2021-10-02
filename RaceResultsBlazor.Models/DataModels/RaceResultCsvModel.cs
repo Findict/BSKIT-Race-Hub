@@ -1,4 +1,4 @@
-﻿namespace RaceResultsBlazor.App.DataModels
+﻿namespace RaceResultsBlazor.Models.DataModels
 {
     public class RaceResultCsvModel
     {

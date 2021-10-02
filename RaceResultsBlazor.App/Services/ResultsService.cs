@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using RaceResultsBlazor.App.Models;
-using RaceResultsBlazor.App.ViewModels;
+using RaceResultsBlazor.Models.Models;
+using RaceResultsBlazor.Models.ViewModels;
 
 namespace RaceResultsBlazor.App.Services
 {

@@ -1,6 +1,6 @@
-﻿using RaceResultsBlazor.App.DataModels;
+﻿using RaceResultsBlazor.Models.DataModels;
 
-namespace RaceResultsBlazor.App.Models
+namespace RaceResultsBlazor.Models.Models
 {
     public class PageOptions
     {

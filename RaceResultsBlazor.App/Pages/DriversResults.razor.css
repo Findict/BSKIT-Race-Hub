@@ -90,6 +90,7 @@ td, th {
 
 .result {
     text-align: center;
+    padding: 0px;
     border: solid #000000b0 2px;
 }
 

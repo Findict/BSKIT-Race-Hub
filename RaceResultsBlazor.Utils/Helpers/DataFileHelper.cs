@@ -2,7 +2,7 @@
 using System.IO;
 using ServiceStack.Text;
 
-namespace RaceResultsBlazor.App.Helpers
+namespace RaceResultsBlazor.Utils.Helpers
 {
     public static class DataFileHelper
     {
