@@ -35,6 +35,8 @@
 .drivers {
     display: flex;
     justify-content: space-evenly;
+    margin: 2px;
+    grid-gap: 2px;
     flex-wrap: wrap;
 }
 
@@ -59,7 +61,6 @@
     padding: 0px;
     min-width: 225px;
     height: 32px;
-    margin: 2px;
     border-radius: 6px;
     background: #000000cc;
 }
