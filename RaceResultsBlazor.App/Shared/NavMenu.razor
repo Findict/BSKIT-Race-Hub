@@ -5,11 +5,12 @@
 
 <div>
     <div class="top-row">
-        <Button @onclick="@RefreshData"> <span class="oi oi-reload mr-2" /></Button>
+        <Button class="nav-top-button" @onclick="RefreshData"><span class="oi oi-reload mr-2" /></Button>
+        <Button class="nav-top-button expand-button" @onclick="ToggleNavMenu"><span class="oi oi-list mr-2" /></Button>
     </div>
     @foreach (var serie in series)
     {
-    <div class="dropdown">
+    <div class="dropdown @NavMenuCssClass">
         <a class="btn dropdown-toggle nav-btn" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             @serie.Title
         </a>
@@ -40,6 +41,10 @@
 @code {
     private SeriesInfo[] series;
 
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
     protected override async Task OnInitializedAsync()
     {
         series = await ResultsService.GetSeriesAsync();
@@ -52,5 +57,10 @@
         await ResultsService.RefreshData();
 
         series = await ResultsService.GetSeriesAsync();
+    }
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
     }
 }
