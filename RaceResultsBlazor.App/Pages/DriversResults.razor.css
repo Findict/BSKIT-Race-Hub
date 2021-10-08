@@ -28,9 +28,7 @@ td, th {
     background-color: #000000e0;
     color: #ffffff;
     white-space: nowrap;
-}
-
-.team-table td, .team-table th {
+    min-height: 32px;
     height: 32px;
 }
 
@@ -121,6 +119,7 @@ td, th {
 
 .totals {
     text-align: right;
+    min-width: 42px;
 }
 
 .fastest:after {
