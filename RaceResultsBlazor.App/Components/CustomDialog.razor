@@ -1,0 +1,18 @@
+﻿@using RaceResultsBlazor.App.Components.Models
+
+<div class="dialog-backdrop">
+    <div class="dialog-box">
+        <h3>@Title</h3>
+
+        <div class="dialog-box-divider" />
+
+        <div>@Content</div>
+
+        <div class="dialog-button-bar">
+            @foreach (var button in Buttons)
+            {
+                <button class="dialog-button @button.Classes" onclick="@button.ButtonAction">@button.Title</button>
+            }
+        </div>
+    </div>
+</div>

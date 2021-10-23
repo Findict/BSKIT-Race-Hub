@@ -5,6 +5,7 @@
 @using System.Linq
 @inject ResultsService ResultsService
 
+<section class="stretched-section">
 @if (results == null)
 {
     <p><em>Loading...</em></p>
@@ -14,7 +15,7 @@ else
     <div class="team-list" style="background-image: url('@results.BackgroundPath')">
     @foreach (var teamResult in results.TeamResults)
     {
-        <div class="team-container" style="border-color: @teamResult.GetColor()">
+        <div class="team-container" style="        border-color: @teamResult.GetColor(); background: linear-gradient( 90deg, @($"{teamResult.GetColor()}80"), #00000080 80%)">
             <div class="team-name">
                 <span class="flagged-name-span">@teamResult.Name</span>
                 @if (teamResult.HasValidCountry) {<img class="team-flag" src="@teamResult.Country" />}
@@ -33,6 +34,7 @@ else
     }
     </div>
 }
+</section>
 
 @code {
     private TeamResultsViewModel results;

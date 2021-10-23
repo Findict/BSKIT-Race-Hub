@@ -1,3 +1,5 @@
-﻿.main {
-    padding: 20px 50px;
+﻿.main-section {
+    padding: 12px 8px;
+    flex-grow: 1;
+    width: 100%;
 }

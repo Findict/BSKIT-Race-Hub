@@ -26,8 +26,6 @@ button:hover {
 }
 
 .expand-button {
-    visibility: visible;
-    justify-self: flex-end;
     justify-self: end;
 }
 
@@ -46,6 +44,7 @@ button:hover {
     background-color: #0f0f0f;
     border-radius: 8px;
     padding: 0px;
+    z-index: 2001;
 }
 
 .nav-sub-menu-item {
@@ -59,8 +58,7 @@ button:hover {
 }
 
 .nav-btn {
-    padding: 8px;
-    margin: 8px;
+    padding: 16px;
     width: -webkit-fill-available;
 }
 
@@ -101,6 +99,10 @@ button:hover {
 }
 
 @media (min-width: 641px) {
+    .top-row {
+        display: none;
+    }
+
     .navbar-toggler {
         display: none;
     }
@@ -110,11 +112,28 @@ button:hover {
         display: block;
     }
 
+    .nav-btn {
+        width: auto;
+    }
+
     .nav-top-button {
         flex-grow: 1;
     }
 
     .expand-button {
+        display: none;
+    }
+
+    .menu-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 640.95px) {
+    .desktop-only {
         display: none;
     }
 }

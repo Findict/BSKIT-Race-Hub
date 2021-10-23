@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace RaceResultsBlazor.App.Services
     public class ResultsService
     {
         private readonly List<SeriesRecords> seriesRecords = new();
+        private DateTime lastRefreshed;
+
 
         public ResultsService()
         {
@@ -32,6 +35,8 @@ namespace RaceResultsBlazor.App.Services
             seriesRecords.Clear();
 
             this.GetSeriesData();
+
+            this.lastRefreshed = DateTime.Now;
 
             return Task.CompletedTask;
         }
@@ -63,7 +68,14 @@ namespace RaceResultsBlazor.App.Services
             return Task.FromResult(results);
         }
 
-        public Task<SeriesInfo[]> GetSeriesAsync()
-            => Task.FromResult(this.seriesRecords.Select(r => r.Info).OrderBy(r => r.Index).ToArray());
+        public Task<SeriesInfo[]> GetSeriesAsync(bool forceRefresh = false)
+        {
+            if (forceRefresh || this.lastRefreshed.AddMinutes(5) < DateTime.Now)
+            {
+                this.RefreshData();
+            }
+
+            return Task.FromResult(this.seriesRecords.Select(r => r.Info).OrderBy(r => r.Index).ToArray());
+        }
     }
 }

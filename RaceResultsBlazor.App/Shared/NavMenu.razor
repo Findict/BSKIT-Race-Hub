@@ -1,66 +1,40 @@
 ﻿@using RaceResultsBlazor.App.Services
-@using RaceResultsBlazor.Models.Models
 @inject ResultsService ResultsService
 @inject NavigationManager NavManager
 
-<div>
+<div class="menu-container">
     <div class="top-row">
-        <Button class="nav-top-button" @onclick="RefreshData"><span class="oi oi-reload mr-2" /></Button>
+        <Button class="nav-top-button" @onclick="NavigateHome"><span class="oi oi-home mr-2" /></Button>
         <Button class="nav-top-button expand-button" @onclick="ToggleNavMenu"><span class="oi oi-list mr-2" /></Button>
     </div>
+
+    <Button class="nav-btn desktop-only" @onclick="NavigateHome"><span class="oi oi-home mr-2" /></Button>
     @foreach (var serie in series)
     {
-    <div class="dropdown @NavMenuCssClass">
-        <a class="btn dropdown-toggle nav-btn" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            @serie.Title
-        </a>
-        <div class="dropdown-menu nav-sub-menu" aria-labelledby="dropdownMenuButton">
-        @if (serie.ContainsTeamInfo)
-        {
-            <a class="nav-sub-menu-item dropdown-item" href="@serie.TeamsInfoLink">
-                Teams info
+        <div class="dropdown @NavMenuCssClass">
+            <a class="btn dropdown-toggle nav-btn" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @serie.Title
             </a>
-        }
-        @if (serie.ContainsDriverResults)
-        {
-            <a class="dropdown-item nav-sub-menu-item" href="@serie.DriversResultsLink">
-                Drivers standings
-            </a>
-        }
-        @if (serie.ContainsTeamResults)
-        {
-            <a class="nav-sub-menu-item dropdown-item" href="@serie.TeamsResultsLink">
-                Teams standings
-            </a>
-        }
+            <div class="dropdown-menu nav-sub-menu" aria-labelledby="dropdownMenuButton">
+                @if (serie.ContainsTeamInfo)
+                {
+                    <a class="nav-sub-menu-item dropdown-item" href="@serie.TeamsInfoLink">
+                        Teams info
+                    </a>
+                }
+                @if (serie.ContainsDriverResults)
+                {
+                    <a class="dropdown-item nav-sub-menu-item" href="@serie.DriversResultsLink">
+                        Drivers standings
+                    </a>
+                }
+                @if (serie.ContainsTeamResults)
+                {
+                    <a class="nav-sub-menu-item dropdown-item" href="@serie.TeamsResultsLink">
+                        Teams standings
+                    </a>
+                }
+            </div>
         </div>
-    </div>
     }
 </div>
-
-@code {
-    private SeriesInfo[] series;
-
-    private bool collapseNavMenu = true;
-
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    protected override async Task OnInitializedAsync()
-    {
-        series = await ResultsService.GetSeriesAsync();
-    }
-
-    protected async Task RefreshData()
-    {
-        NavManager.NavigateTo("/");
-
-        await ResultsService.RefreshData();
-
-        series = await ResultsService.GetSeriesAsync();
-    }
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}
