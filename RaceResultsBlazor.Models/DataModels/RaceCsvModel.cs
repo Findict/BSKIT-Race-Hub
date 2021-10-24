@@ -10,6 +10,8 @@ namespace RaceResultsBlazor.Models.DataModels
 
         public string Country { get; set; }
 
+        public string RaceLength { get; internal set; }
+
         public DateTimeOffset StartTime { get; set; }
 
         public int Fastest { get; set; }

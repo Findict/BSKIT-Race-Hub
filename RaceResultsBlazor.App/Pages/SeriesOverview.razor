@@ -27,7 +27,7 @@
             <div class="@this.InfoViewModel.CalendarClass">
                 @foreach (var race in this.InfoViewModel.Races)
                 {
-                    <div>@race.TrackName - @this.GetRaceDateString(race.StartingTime)</div>
+                    <div>@race.TrackName - @race.RaceLength - @this.GetRaceDateString(race.StartingTime)</div>
                 }
                 <div class="thicc-separator mt-1" />
             </div>

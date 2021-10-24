@@ -11,17 +11,8 @@
     <Button class="nav-btn desktop-only home" @onclick="NavigateHome"><span class="oi oi-home mr-2" /></Button>
     @foreach (var serie in series)
     {
-        <div class="btn-group dropdown font-size-zero @NavMenuCssClass">
+        <div class="@NavMenuCssClass">
             <a class="btn nav-btn main_btn" href="@serie.BaseLink">@serie.Title</a>
-            <a class="btn dropdown-toggle dropdown-toggle-split nav-btn-toggle nav-btn" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-            <div class="dropdown-menu nav-sub-menu" aria-labelledby="dropdownMenuButton">
-                @foreach (var link in serie.InternalLinks)
-                {
-                    <a class="nav-sub-menu-item dropdown-item" href="@($"{serie.BaseLink}{link.Href}")">
-                        @link.Title
-                    </a>
-                }
-            </div>
         </div>
     }
 </div>
