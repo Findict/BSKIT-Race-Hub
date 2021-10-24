@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaceResultsBlazor.App", "RaceResultsBlazor.App\RaceResultsBlazor.App.csproj", "{E5B75E86-E2DF-4540-AFF9-44365D9EFDF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceResultsBlazor.Models", "RaceResultsBlazor.Models\RaceResultsBlazor.Models.csproj", "{61241EC7-122C-4E1E-BCDF-9E33B77F21BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaceResultsBlazor.Models", "RaceResultsBlazor.Models\RaceResultsBlazor.Models.csproj", "{61241EC7-122C-4E1E-BCDF-9E33B77F21BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceResultsBlazor.Utils", "RaceResultsBlazor.Utils\RaceResultsBlazor.Utils.csproj", "{BD580585-F771-45C3-BBEA-43AA90C26725}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaceResultsBlazor.Utils", "RaceResultsBlazor.Utils\RaceResultsBlazor.Utils.csproj", "{BD580585-F771-45C3-BBEA-43AA90C26725}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -11,13 +11,21 @@
 }
 
 button {
-    border: hidden;
+    border: none;
     background: transparent;
     color: white;
 }
 
-button:hover {
-    background: #ffffff30
+.home {
+    height: 48px;
+    width: 48px;
+}
+
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 52px;
 }
 
 .nav-top-button {
@@ -26,8 +34,6 @@ button:hover {
 }
 
 .expand-button {
-    visibility: visible;
-    justify-self: flex-end;
     justify-self: end;
 }
 
@@ -42,10 +48,15 @@ button:hover {
     top: -2px;
 }
 
+.main_btn {
+    padding: 8px 16px;
+}
+
 .nav-sub-menu {
     background-color: #0f0f0f;
     border-radius: 8px;
     padding: 0px;
+    z-index: 2001;
 }
 
 .nav-sub-menu-item {
@@ -59,13 +70,16 @@ button:hover {
 }
 
 .nav-btn {
-    padding: 8px;
-    margin: 8px;
-    width: -webkit-fill-available;
+    color: white;
+    border-width: 0px;
 }
 
 .nav-btn:hover {
     background: #ffffff30;
+}
+
+.nav-btn-toggle {
+    padding: 8px 8px;
 }
 
 .nav-item {
@@ -100,7 +114,15 @@ button:hover {
     color: white;
 }
 
+.font-size-zero {
+    font-size: 0;
+}
+
 @media (min-width: 641px) {
+    .top-row {
+        display: none;
+    }
+
     .navbar-toggler {
         display: none;
     }
@@ -115,6 +137,20 @@ button:hover {
     }
 
     .expand-button {
+        display: none;
+    }
+
+    .menu-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        column-gap: 8px;
+        min-height: 52px;
+    }
+}
+
+@media (max-width: 640.95px) {
+    .desktop-only {
         display: none;
     }
 }

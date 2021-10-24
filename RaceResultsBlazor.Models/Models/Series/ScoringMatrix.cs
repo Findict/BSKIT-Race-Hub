@@ -4,7 +4,7 @@ using RaceResultsBlazor.Models.DataModels;
 
 namespace RaceResultsBlazor.Models.Models
 {
-    internal class ScoringMatrix
+    public class ScoringMatrix
     {
         public ScoringMatrix(ScoringMatrixDataModel m)
         {

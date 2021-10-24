@@ -1,0 +1,50 @@
+﻿@page "/series/{title}"
+
+@using RaceResultsBlazor.App.Services
+@inject ResultsService ResultsService
+
+<section class="central-section">
+    <h2>@InfoViewModel.Title</h2>
+
+    @if (this.InfoViewModel.InternalLinks.Any())
+    {
+        <div class="nav-btn-bar mb-2">
+            @foreach (var link in this.InfoViewModel.InternalLinks)
+            {
+                <a class="custom-btn-primary series-nav-btn" href="@($"/series/{this.Title}{link.Href}")">@link.Title</a>
+            }
+        </div>
+    }
+
+    @if (!this.InfoViewModel.HideCalendar && this.InfoViewModel.Races.Count() > 0)
+    {
+        <section class="sub-section">
+            <h3 class="toggelable-header my-0" @onclick="this.InfoViewModel.ToggleCalendar">
+            Calendar <span class="oi expand-icon @this.InfoViewModel.CalendarCollapseButtonClass mr-2" />
+            </h3>
+            <div class="thin-separator mb-2" />
+
+            <div class="@this.InfoViewModel.CalendarClass">
+                @foreach (var race in this.InfoViewModel.Races)
+                {
+                    <div>@race.TrackName - @race.RaceLength - @this.GetRaceDateString(race.StartingTime)</div>
+                }
+                <div class="thicc-separator mt-1" />
+            </div>
+        </section>
+    }
+
+    @foreach (var seriesSection in this.InfoViewModel.Sections)
+    {
+        <section class="sub-section">
+            <h3 class="toggelable-header my-0" @onclick="seriesSection.ToggleText">@seriesSection.Title <span class="oi expand-icon @seriesSection.CollapseButtonClass mr-2" /></h3>
+            
+            <div class="thin-separator mb-2" />
+
+            <div class="@seriesSection.TextClass">
+                @((MarkupString)seriesSection.Content)
+                <div class="thicc-separator mt-1" />
+            </div>
+        </section>
+    }
+</section>

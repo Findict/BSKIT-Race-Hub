@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace RaceResultsBlazor.App.Services
     public class ResultsService
     {
         private readonly List<SeriesRecords> seriesRecords = new();
+        private DateTime lastRefreshed;
+
 
         public ResultsService()
         {
@@ -33,7 +36,23 @@ namespace RaceResultsBlazor.App.Services
 
             this.GetSeriesData();
 
+            this.lastRefreshed = DateTime.Now;
+
             return Task.CompletedTask;
+        }
+
+        public Task<SeriesInfoViewModel> GetSeriesInfoAsync(string title)
+        {
+            var series = seriesRecords.FirstOrDefault(s => s.Info.Name == title);
+
+            if (series == null)
+            {
+                return null;
+            }
+
+            var info = new SeriesInfoViewModel(series.Info, series.GetRaces());
+
+            return Task.FromResult(info);
         }
 
         public Task<DriverResultsViewModel> GetDriverResultsAsync(string title)
@@ -63,7 +82,14 @@ namespace RaceResultsBlazor.App.Services
             return Task.FromResult(results);
         }
 
-        public Task<SeriesInfo[]> GetSeriesAsync()
-            => Task.FromResult(this.seriesRecords.Select(r => r.Info).OrderBy(r => r.Index).ToArray());
+        public Task<SeriesInfo[]> GetSeriesAsync(bool forceRefresh = false)
+        {
+            if (forceRefresh || this.lastRefreshed.AddMinutes(5) < DateTime.Now)
+            {
+                this.RefreshData();
+            }
+
+            return Task.FromResult(this.seriesRecords.Select(r => r.Info).OrderBy(r => r.Index).ToArray());
+        }
     }
 }

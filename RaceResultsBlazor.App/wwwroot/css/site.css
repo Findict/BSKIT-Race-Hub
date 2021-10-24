@@ -1,17 +1,47 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: 100%;
+}
+
+body {
+    background-color: #181818;
 }
 
 a, .btn-link {
     color: #0366d6;
 }
 
-.btn-primary {
+.custom-btn-primary {
     color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    background-color: #3a0647;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+    .custom-btn-primary:hover {
+        color: #fff;
+        background-color: #5c0a71;
+        text-decoration: none;
+    }
+
+    .custom-btn-primary:active {
+        background-color: #26042f !important;
+    }
+
+.central-section {
+    padding: 12px 8px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.stretched-section {
+    flex: 1;
+    width: 100%;
 }
 
 .content {

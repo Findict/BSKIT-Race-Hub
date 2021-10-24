@@ -6,9 +6,13 @@ namespace RaceResultsBlazor.Models.DataModels
     {
         public int Number { get; set; }
 
+        public string TrackName { get; set; }
+
         public string Country { get; set; }
 
-        public long StartTime { get; set; }
+        public string RaceLength { get; internal set; }
+
+        public DateTimeOffset StartTime { get; set; }
 
         public int Fastest { get; set; }
 
