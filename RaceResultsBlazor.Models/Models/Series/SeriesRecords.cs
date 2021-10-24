@@ -58,6 +58,11 @@ namespace RaceResultsBlazor.Models.Models
                 .ToList();
         }
 
+        public List<Race> GetRaces()
+        {
+            return this.racesRecords;
+        }
+
         public List<Team> GetTeamResults()
         {
             var teams = this.teamsRecords.Where(t => !t.ForceHide)
@@ -103,6 +108,6 @@ namespace RaceResultsBlazor.Models.Models
         
 
         private static string CountryToAssetUrl(string country)
-            => $"assets/{country?.ToLower().Trim().Replace(' ', '-') ?? string.Empty}.png";
+            => $"assets/flags/{country?.ToLower().Trim().Replace(' ', '-') ?? string.Empty}.png";
     }
 }

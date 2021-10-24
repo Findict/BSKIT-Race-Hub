@@ -41,6 +41,20 @@ namespace RaceResultsBlazor.App.Services
             return Task.CompletedTask;
         }
 
+        public Task<SeriesInfoViewModel> GetSeriesInfoAsync(string title)
+        {
+            var series = seriesRecords.FirstOrDefault(s => s.Info.Name == title);
+
+            if (series == null)
+            {
+                return null;
+            }
+
+            var info = new SeriesInfoViewModel(series.Info, series.GetRaces());
+
+            return Task.FromResult(info);
+        }
+
         public Task<DriverResultsViewModel> GetDriverResultsAsync(string title)
         {
             var series = seriesRecords.FirstOrDefault(s => s.Info.Name == title);

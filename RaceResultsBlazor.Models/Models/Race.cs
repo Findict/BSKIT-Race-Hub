@@ -5,13 +5,14 @@ using RaceResultsBlazor.Models.DataModels;
 
 namespace RaceResultsBlazor.Models.Models
 {
-    class Race
+    public class Race
     {
         public Race(RaceCsvModel raceCsvModel, List<RaceResultCsvModel> raceResultCsvModels, SeriesInfo info)
         {
             this.Number = raceCsvModel.Number;
+            this.TrackName = raceCsvModel.TrackName;
             this.Country = raceCsvModel.Country;
-            this.StartingTime = DateTime.FromFileTimeUtc(raceCsvModel.StartTime);
+            this.StartingTime = raceCsvModel.StartTime;
             this.Scoring = info.ScoringMatrices.FirstOrDefault(s => s.Id == raceCsvModel.ScoringId);
             this.Results = raceResultCsvModels?.Select(r => new DriverResult
             {
@@ -25,9 +26,11 @@ namespace RaceResultsBlazor.Models.Models
 
         public int Number { get; }
 
+        public string TrackName { get; }
+
         public string Country { get; }
 
-        public DateTime StartingTime { get; }
+        public DateTimeOffset StartingTime { get; }
 
         public ScoringMatrix Scoring { get; }
 

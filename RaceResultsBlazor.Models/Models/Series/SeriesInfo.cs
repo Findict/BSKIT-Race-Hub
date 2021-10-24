@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RaceResultsBlazor.Models.DataModels;
 using RaceResultsBlazor.Utils.Helpers;
@@ -23,10 +24,13 @@ namespace RaceResultsBlazor.Models.Models
         private void PopulateInfo(SeriesInfoDataModel info)
         {
             this.Title = info.Title;
+            this.LongTitle = info.LongTitle;
             this.Index = info.Index;
             this.MaxRacesToCount = info.MaxRacesToCount ?? 999;
+            this.Sections = info.Sections?.Select(s => new SeriesSection(s)).ToList();
+            this.HideCalendar = info.HideCalendar;
+            this.InternalLinks = info.InternalLinks?.Select(l => new Link(l)).ToList() ?? new List<Link>();
 
-            this.PageOptions = new PageOptions(info.PageOptions);
             this.ScoringMatrices = info.ScoringMatrices?.Select(m => new ScoringMatrix(m)).ToList() ?? new List<ScoringMatrix>();
             this.CalculateTeamResults = info.CalculateTeamResults;
         }
@@ -42,36 +46,27 @@ namespace RaceResultsBlazor.Models.Models
 
         public string Title { get; private set; }
 
-        public int Index { get; private set; }
+        public string LongTitle { get; private set; }
 
-        public PageOptions PageOptions { get; private set; }
+        public int Index { get; private set; }
 
         internal List<ScoringMatrix> ScoringMatrices { get; private set; }
 
+        public List<SeriesSection> Sections { get; private set; }
+
+        public bool HideCalendar { get; private set; }
+        
         public int MaxRacesToCount { get; internal set; }
 
         public bool CalculateTeamResults { get; private set; }
 
-        public bool ContainsDriverStandings
-            => hasDrivers;
+        public string BaseLink
+            => $@"series/{this.Name}";
+
+        public List<Link> InternalLinks { get; private set; }
 
         public bool ContainsDriverResults
-            => !this.PageOptions.HideDriverResults && hasDrivers && hasRaces;
-
-        public bool ContainsTeamResults
-            => !this.PageOptions.HideTeamsStandings && hasTeams;
-
-        public bool ContainsTeamInfo
-            => !this.PageOptions.HideTeamsInfo && hasTeams && hasDrivers;
-
-        public string DriversResultsLink
-            => $"series/{this.Name}/drivers/results";
-
-        public string TeamsResultsLink
-            => $"series/{this.Name}/teams/results";
-
-        public string TeamsInfoLink
-            => $"series/{this.Name}/teams";
+            => hasDrivers && hasRaces;
 
         public string DriverLocation
             => @$"wwwroot\data\{this.Name}\drivers.csv";
