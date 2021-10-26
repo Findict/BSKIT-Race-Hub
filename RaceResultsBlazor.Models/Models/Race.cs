@@ -15,14 +15,9 @@ namespace RaceResultsBlazor.Models.Models
             this.RaceLength = raceCsvModel.RaceLength;
             this.StartingTime = raceCsvModel.StartTime;
             this.Scoring = info.ScoringMatrices.FirstOrDefault(s => s.Id == raceCsvModel.ScoringId);
-            this.Results = raceResultCsvModels?.Select(r => new DriverResult
-            {
-                DriverId = r.Driver,
-                Position = r.GetRaceArray()[this.Number - 1],
-                IsPointsFinish = this.Scoring?.IsPointsFinish(r.GetRaceArray()[this.Number - 1]) ?? false,
-                ExcludeFromCountback = this.Scoring?.ExcludeFromCountback ?? false,
-                IsFastestLap = r.Driver == raceCsvModel.Fastest
-            }).ToList();
+            this.Results = raceResultCsvModels?.Select(r => 
+                new DriverResult(r, r.GetRaceArray()[this.Number - 1]?.Trim(), this.Scoring, r.Driver == raceCsvModel.Fastest))
+                .ToList();
         }
 
         public int Number { get; }

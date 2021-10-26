@@ -14,7 +14,7 @@
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, #1f0326 0%, #3a0647 80%);
+    background-image: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary-default) 80%);
     z-index: 5001;
 }
 

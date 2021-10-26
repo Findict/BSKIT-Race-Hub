@@ -33,10 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\js\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\RaceResultsBlazor.Models\RaceResultsBlazor.Models.csproj" />
   </ItemGroup>
 
