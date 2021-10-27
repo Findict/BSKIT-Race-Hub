@@ -12,13 +12,32 @@ namespace RaceResultsBlazor.App.Pages
         [Parameter]
         public string Title { get; set; }
 
-        public SeriesInfoViewModel InfoViewModel { get; set; }
+        public SeriesInfoViewModel InfoViewModel { get; private set; }
+
+        public bool CalendarIsLoading { get; private set; }
+
+        public SeriesOverview()
+        {
+            this.CalendarIsLoading = true;
+        }
 
         protected override async Task OnParametersSetAsync()
         {
             this.InfoViewModel = await this.ResultsService.GetSeriesInfoAsync(this.Title);
+        }
 
-            this.userOffset = TimeSpan.FromMinutes(-await this.JsRuntime.InvokeAsync<int>("blazorGetTimezoneOffset", null));
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                this.userOffset = await this.TimeZoneService.GetUserDateTimeOffset();
+            }
+
+            this.StateHasChanged();
+
+            this.CalendarIsLoading = false;
         }
 
         protected string GetRaceDateString(DateTimeOffset dateTime)

@@ -4,6 +4,7 @@
 
 @inject IJSRuntime JsRuntime
 @inject ResultsService ResultsService
+@inject TimeZoneService TimeZoneService
 
 <section class="central-section">
     <h2>@InfoViewModel.Title</h2>
@@ -26,13 +27,20 @@
             </h3>
             <div class="thin-separator mb-2" />
 
-            <div class="@this.InfoViewModel.CalendarClass">
-                @foreach (var race in this.InfoViewModel.Races)
-                {
-                    <div>@race.TrackName - @race.RaceLength - @this.GetRaceDateString(race.StartingTime)</div>
-                }
-                <div class="thicc-separator mt-1" />
-            </div>
+            @if (this.CalendarIsLoading)
+            {
+                <div>Loading...</div>
+            }
+            else
+            {
+                <div class="@this.InfoViewModel.CalendarClass">
+                    @foreach (var race in this.InfoViewModel.Races)
+                    {
+                        <div>@race.TrackName - @race.RaceLength - @this.GetRaceDateString(race.StartingTime)</div>
+                    }
+                    <div class="thicc-separator mt-1" />
+                </div>
+            }
         </section>
     }
 
