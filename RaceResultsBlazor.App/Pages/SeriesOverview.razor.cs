@@ -33,11 +33,12 @@ namespace RaceResultsBlazor.App.Pages
             if (firstRender)
             {
                 this.userOffset = await this.TimeZoneService.GetUserDateTimeOffset();
+
+                this.CalendarIsLoading = false;
+
+                this.StateHasChanged();
             }
 
-            this.StateHasChanged();
-
-            this.CalendarIsLoading = false;
         }
 
         protected string GetRaceDateString(DateTimeOffset dateTime)
