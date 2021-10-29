@@ -1,0 +1,5 @@
+﻿@using RaceResultsBlazor.App.Services
+
+@inject TimeZoneService TimeZoneService 
+
+<div>@this.Race.TrackName - @this.Race.RaceLength - @this.GetRaceDateString(this.Race.StartingTime)</div>

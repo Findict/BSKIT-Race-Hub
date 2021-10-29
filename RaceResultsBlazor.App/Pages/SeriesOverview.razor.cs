@@ -38,14 +38,6 @@ namespace RaceResultsBlazor.App.Pages
 
                 this.StateHasChanged();
             }
-
-        }
-
-        protected string GetRaceDateString(DateTimeOffset dateTime)
-        {
-            var localDateTime = dateTime.ToOffset(this.userOffset);
-
-            return $"{localDateTime:t} (UTC{localDateTime:zzz}), {localDateTime:D}";
         }
     }
 }

@@ -1,0 +1,35 @@
+﻿.sub-section {
+    margin-bottom: 24px;
+}
+
+.thin-separator {
+    height: 1px;
+    width: 100%;
+    background-color: white;
+}
+
+.thicc-separator {
+    height: 2px;
+    width: 100%;
+    background-color: white;
+}
+
+.toggelable-header {
+    user-select: none;
+}
+
+.toggelable:hover {
+    cursor: pointer;
+}
+
+.expand-icon {
+    float: right;
+    font-size: 1.25rem;
+    width: 1.25rem;
+    margin: 0.25rem;
+    text-align: center;
+}
+
+.collapsed {
+    display: none;
+}

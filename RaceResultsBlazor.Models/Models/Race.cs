@@ -11,7 +11,7 @@ namespace RaceResultsBlazor.Models.Models
         {
             this.Number = raceCsvModel.Number;
             this.TrackName = raceCsvModel.TrackName;
-            this.Country = raceCsvModel.Country;
+            this.Flag = raceCsvModel.Country;
             this.RaceLength = raceCsvModel.RaceLength;
             this.StartingTime = raceCsvModel.StartTime;
             this.Scoring = info.ScoringMatrices.FirstOrDefault(s => s.Id == raceCsvModel.ScoringId);
@@ -24,7 +24,7 @@ namespace RaceResultsBlazor.Models.Models
 
         public string TrackName { get; }
 
-        public string Country { get; }
+        public string Flag { get; }
 
         public string RaceLength { get; }
 

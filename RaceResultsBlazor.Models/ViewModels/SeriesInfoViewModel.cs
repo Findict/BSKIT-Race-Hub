@@ -10,7 +10,7 @@ namespace RaceResultsBlazor.Models.ViewModels
         public SeriesInfoViewModel(SeriesInfo info, List<Race> races)
         {
             this.Title = info.LongTitle;
-            this.Races = races ?? new List<Race>();
+            this.Races = races.Select(r => new RaceCalendarItemViewModel(r)).ToList() ?? new List<RaceCalendarItemViewModel>();
             this.Sections = info.Sections?.Select(s => new SeriesSectionViewModel(s)).ToList() ?? new List<SeriesSectionViewModel>();
             this.InternalLinks = info.InternalLinks;
             this.HideCalendar = info.HideCalendar;
@@ -18,7 +18,7 @@ namespace RaceResultsBlazor.Models.ViewModels
 
         public string Title { get; private set; }
 
-        public List<Race> Races { get; private set; } 
+        public List<RaceCalendarItemViewModel> Races { get; private set; } 
 
         public List<SeriesSectionViewModel> Sections { get; private set; }
 

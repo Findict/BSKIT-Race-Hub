@@ -1,0 +1,10 @@
+﻿<section class="sub-section">
+    <h3 class="toggelable-header my-0" @onclick="this.Section.ToggleText">@this.Section.Title <span class="oi expand-icon @this.Section.CollapseButtonClass mr-2" /></h3>
+
+    <div class="thin-separator mb-2" />
+
+    <div class="@this.Section.TextClass">
+        @((MarkupString)this.Section.Content)
+        <div class="thicc-separator mt-1" />
+    </div>
+</section>

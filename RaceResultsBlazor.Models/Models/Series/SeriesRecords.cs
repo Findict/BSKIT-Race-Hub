@@ -103,7 +103,7 @@ namespace RaceResultsBlazor.Models.Models
         }
 
         public List<string> GetRaceImages()
-            => this.racesRecords.Select(r => CountryToAssetUrl(r.Country)).ToList();
+            => this.racesRecords.Select(r => CountryToAssetUrl(r.Flag)).ToList();
 
         
 
