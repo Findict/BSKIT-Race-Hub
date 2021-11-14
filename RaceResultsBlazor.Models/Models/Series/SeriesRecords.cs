@@ -28,14 +28,14 @@ namespace RaceResultsBlazor.Models.Models
 
         public List<DriverLine> GetDriverResults()
         {
-            var teams = this.teamsRecords?.Select(t => new Team(t, CountryToAssetUrl)).ToList();
+            var teams = this.teamsRecords?.Select(t => new Team(t)).ToList();
 
             var drivers =  this.driverRecords.Select(record => new DriverLine
             {
                 Id = record.Id,
                 Name = record.Name,
                 Team = teams?.FirstOrDefault(t => t.Name == record.Team) ?? new Team(record.Team),
-                CountryFlag = CountryToAssetUrl(record.Country),
+                CountryFlag = FlagHelper.ImageFromString(record.Country),
                 TotalPoints = this.racesRecords.Select(race => race.GetDriverScore(record.Id))
                     .OrderByDescending(s => s)
                     .Take(this.Info.MaxRacesToCount).Sum(),
