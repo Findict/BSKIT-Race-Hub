@@ -1,17 +1,25 @@
-﻿.sub-section {
-    margin-bottom: 24px;
+﻿.calendar-item-container {
+
 }
 
-.thin-separator {
-    height: 1px;
-    width: 100%;
-    background-color: white;
+.calendar-top-row {
+
 }
 
-.thicc-separator {
-    height: 2px;
-    width: 100%;
-    background-color: white;
+.calendar-item-number {
+
+}
+
+.calendar-item-title {
+
+}
+
+.calendar-item-flag {
+
+}
+
+.calendar-track-flag {
+
 }
 
 .toggelable-header {

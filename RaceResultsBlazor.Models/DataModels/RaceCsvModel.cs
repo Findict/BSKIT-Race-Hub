@@ -6,6 +6,8 @@ namespace RaceResultsBlazor.Models.DataModels
     {
         public int Number { get; set; }
 
+        public string Title { get; set; }
+
         public string TrackName { get; set; }
 
         public string Country { get; set; }

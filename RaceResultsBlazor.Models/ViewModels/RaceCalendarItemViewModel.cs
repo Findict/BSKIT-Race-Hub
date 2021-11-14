@@ -10,9 +10,18 @@ namespace RaceResultsBlazor.Models.ViewModels
             this.TrackName = race.TrackName;
             this.StartingTime = race.StartingTime;
             this.RaceLength = race.RaceLength;
+            this.Number = race.Number;
+            this.Title = race.Title;
+            this.Flag = race.Flag;
         }
 
+        public int Number { get; }
+
+        public string Title { get; }
+
         public string TrackName { get; }
+
+        public string Flag { get; }
 
         public DateTimeOffset StartingTime { get; }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using RaceResultsBlazor.Models.DataModels;
+using RaceResultsBlazor.Utils.Helpers;
 
 namespace RaceResultsBlazor.Models.Models
 {
@@ -10,8 +11,9 @@ namespace RaceResultsBlazor.Models.Models
         public Race(RaceCsvModel raceCsvModel, List<RaceResultCsvModel> raceResultCsvModels, SeriesInfo info)
         {
             this.Number = raceCsvModel.Number;
+            this.Title = raceCsvModel.Title;
             this.TrackName = raceCsvModel.TrackName;
-            this.Flag = raceCsvModel.Country;
+            this.Flag = FlagHelper.ImageFromString(raceCsvModel.Country);
             this.RaceLength = raceCsvModel.RaceLength;
             this.StartingTime = raceCsvModel.StartTime;
             this.Scoring = info.ScoringMatrices.FirstOrDefault(s => s.Id == raceCsvModel.ScoringId);
@@ -21,6 +23,8 @@ namespace RaceResultsBlazor.Models.Models
         }
 
         public int Number { get; }
+
+        public string Title { get; }
 
         public string TrackName { get; }
 

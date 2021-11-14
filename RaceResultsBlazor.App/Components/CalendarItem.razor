@@ -2,4 +2,16 @@
 
 @inject TimeZoneService TimeZoneService 
 
-<div>@this.Race.TrackName - @this.Race.RaceLength - @this.GetRaceDateString(this.Race.StartingTime)</div>
+<div class="calendar-item-container">
+    <div class="calendar-top-row">
+        <div class="calendar-item-number">
+            @this.Race.Number
+        </div>
+        <div class="calendar-item-title">
+            @this.Race.Title
+        </div>
+        <div class="calendar-item-flag">
+            <img class="calendar-track-flag" src="@this.Race.Flag" />
+        </div>
+    </div>
+</div>

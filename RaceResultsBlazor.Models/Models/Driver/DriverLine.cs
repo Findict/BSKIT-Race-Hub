@@ -30,11 +30,11 @@ namespace RaceResultsBlazor.Models.Models
     {
         public int Compare(DriverLine x, DriverLine y)
         {
-            var xResults = x.Results.Where(r => !r.ExcludeFromCountback)
+            var xResults = x.Results.Where(r => !r?.ExcludeFromCountback ?? false)
                 .Select(r => int.TryParse(r.Position, out int result) ? result : 0)
                 .Where(r => r > 0)
                 .OrderBy(r => r).ToList();
-            var yResults = y.Results.Where(r => !r.ExcludeFromCountback)
+            var yResults = y.Results.Where(r => !r?.ExcludeFromCountback ?? false)
                 .Select(r => int.TryParse(r.Position, out int result) ? result : 0)
                 .Where(r => r > 0)
                 .OrderBy(r => r).ToList();
