@@ -6,7 +6,7 @@
 
         public string Name { get; set; }
         
-        public string Country { get; set; }
+        public string Flag { get; set; }
 
         public string Team { get; set; }
     }

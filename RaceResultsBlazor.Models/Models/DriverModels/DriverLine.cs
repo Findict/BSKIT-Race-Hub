@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 
@@ -14,7 +13,7 @@ namespace RaceResultsBlazor.Models.Models
 
         public string Name { get; set; }
 
-        public string CountryFlag { get; set; }
+        public string Flag { get; set; }
 
         public Team Team { get; set; }
 
@@ -23,7 +22,7 @@ namespace RaceResultsBlazor.Models.Models
         public int TotalPoints { get; set; }
 
         public bool HasValidCountry
-            => File.Exists($"wwwroot\\{this.CountryFlag}");
+            => File.Exists($"wwwroot\\{this.Flag}");
     }
 
     public class CountBackEqualityComparer : IComparer<DriverLine>
@@ -39,7 +38,7 @@ namespace RaceResultsBlazor.Models.Models
                 .Where(r => r > 0)
                 .OrderBy(r => r).ToList();
 
-            for (int i = 0; i < Math.Min(xResults.Count(), yResults.Count()); i++)
+            for (int i = 0; i < Math.Min(xResults.Count, yResults.Count); i++)
             {
                 var xVal = xResults[i];
                 var yVal = yResults[i];
@@ -51,7 +50,7 @@ namespace RaceResultsBlazor.Models.Models
                 }
             }
 
-            return xResults.Count() - yResults.Count();
+            return xResults.Count - yResults.Count;
         }
     }
 }

@@ -19,9 +19,9 @@ namespace RaceResultsBlazor.Models.Models
             this.driverRecords = DataFileHelper.GetCsvData<DriverCsvModel>(this.Info.DriverLocation);
             this.teamsRecords = DataFileHelper.GetCsvData<TeamCsvModel>(this.Info.TeamsLocation);
             var raceResultsRecords = DataFileHelper.GetCsvData<RaceResultCsvModel>(this.Info.RaceResultsLocation);
-            this.racesRecords = DataFileHelper.GetCsvData<RaceCsvModel>(this.Info.RacesLocation)?.Select(r => new Race(r, raceResultsRecords, this.Info)).ToList();
+            this.racesRecords = DataFileHelper.GetCsvData<RaceCsvModel>(this.Info.RacesLocation)?.Select(r => new Race(r, raceResultsRecords, driverRecords, this.Info)).ToList();
 
-            this.Info.UpdateStatus(this.driverRecords != null, this.teamsRecords != null, this.racesRecords != null);
+            this.Info.UpdateStatus(this.driverRecords != null, this.racesRecords != null);
         }
 
         public SeriesInfo Info { get; private set; }
@@ -35,11 +35,11 @@ namespace RaceResultsBlazor.Models.Models
                 Id = record.Id,
                 Name = record.Name,
                 Team = teams?.FirstOrDefault(t => t.Name == record.Team) ?? new Team(record.Team),
-                CountryFlag = FlagHelper.ImageFromString(record.Country),
+                Flag = record.Flag,
                 TotalPoints = this.racesRecords.Select(race => race.GetDriverScore(record.Id))
                     .OrderByDescending(s => s)
                     .Take(this.Info.MaxRacesToCount).Sum(),
-                Results = this.racesRecords.Select(race => race.Results.FirstOrDefault(result => result.DriverId == record.Id)).ToList()
+                Results = this.racesRecords.Select(race => race.Results.FirstOrDefault(result => result.Driver.Number == record.Id)).ToList()
             }).ToList();
 
             foreach (var driver in drivers)
