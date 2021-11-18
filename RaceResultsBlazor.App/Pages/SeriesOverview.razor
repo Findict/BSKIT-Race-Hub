@@ -34,7 +34,7 @@
             }
             else
             {
-                <div class="@this.InfoViewModel.CalendarClass">
+                <div class="calendar-container @this.InfoViewModel.CalendarClass">
                     @foreach (var race in this.InfoViewModel.Races)
                     {
                         <CalendarItem Race="race" UserTimeOffset="this.userOffset" />

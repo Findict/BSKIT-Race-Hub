@@ -3,7 +3,7 @@
 @inject TimeZoneService TimeZoneService 
 
 <div class="calendar-item-container">
-    <div class="calendar-top-row">
+    <div class="calendar-top-row toggelable" @onclick="this.ToggleText">
         <div class="calendar-item-number">
             @this.Race.Number
         </div>
@@ -12,6 +12,62 @@
         </div>
         <div class="calendar-item-flag">
             <img class="calendar-track-flag" src="@this.Race.Flag" />
+        </div>
+        <span class="oi expand-icon @this.CollapseButtonClass mr-2" />
+    </div>
+    <div class="calendar-item-info @this.DetailsClass" >
+        <div class="track-column" style="background-image: url(@this.Race.Background)">
+            <img class="track-map" src="@this.Race.TrackMap" >
+        </div>
+        <div class="details-column">
+            @if (!string.IsNullOrWhiteSpace(this.Race.TrackName))
+            {
+                <div><strong>Track:</strong> @this.Race.TrackName</div>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(this.Race.RaceLength))
+            {
+                <div><strong>Race Length:</strong> @this.Race.RaceLength</div>
+            }
+
+            @if (this.Race.StartingTime != DateTimeOffset.MinValue)
+            {
+                <div><strong>Start Time:</strong> @this.GetRaceDateString(this.Race.StartingTime)</div>
+            }
+
+            @if (this.Race.Results.Any())
+            {
+                <h5 class="mt-2">Results:</h5>
+                <div class="results-table">
+                    @foreach (var result in this.Race.Results)
+                    {
+                        <div class="result-row">
+                            <span class="result-position">@result.Position</span>
+                            <span class="result-name">@result.Driver.Name</span>
+                            <img class="result-driver-flag" src="@result.Driver.Flag">
+                        </div>
+                    }
+                </div>
+                <div class="other-results mt-2">
+                    <div class="laptime-result-col">
+                        <h5>Pole Position:</h5>
+                        <div class="laptime-result-row">
+                            <span class="result-name">@this.Race.Pole.Driver.Name</span>
+                            <img class="laptime-result-driver-flag" src="@this.Race.Pole.Driver.Flag">
+                            <span class="result-lap-time">@this.Race.PoleLapTime.ToString(@"m\:ss\.fff")</span>
+                        </div>
+                    </div>
+                    <div class="laptime-result-col">
+                        <h5>Fastest Lap:</h5>
+                        <div class="laptime-result-row">
+                            <span class="result-name">@this.Race.Fastest.Driver.Name</span>
+                            <img class="laptime-result-driver-flag" src="@this.Race.Fastest.Driver.Flag">
+                            <span class="result-lap-time">@this.Race.FastestLapTime.ToString(@"m\:ss\.fff")</span>
+                        </div>
+                    </div>
+                </div>
+            }
+
         </div>
     </div>
 </div>

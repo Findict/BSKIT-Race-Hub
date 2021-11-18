@@ -27,6 +27,12 @@
     background-color: white;
 }
 
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .toggelable-header {
     user-select: none;
 }
