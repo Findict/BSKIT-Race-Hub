@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using RaceResultsBlazor.Models.DataModels;
+using RaceResultsBlazor.Utils.Helpers;
 
 namespace RaceResultsBlazor.Models.Models
 {
@@ -11,11 +12,11 @@ namespace RaceResultsBlazor.Models.Models
             this.Name = name;
         }
 
-        public Team(TeamCsvModel team, Func<string, string> countryConverter)
+        public Team(TeamCsvModel team)
         {
             this.Name = team.Name;
             this.Color = team.Color;
-            this.Country = countryConverter(team.Country);
+            this.Country = FlagHelper.ImageFromString(team.Country);
             this.Points = team.Points;
             this.Position = team.Position;
         }

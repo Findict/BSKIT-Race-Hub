@@ -9,7 +9,6 @@ namespace RaceResultsBlazor.Models.Models
     public class SeriesInfo
     {
         private bool hasDrivers;
-        private bool hasTeams;
         private bool hasRaces;
 
         public SeriesInfo(string name)
@@ -35,10 +34,9 @@ namespace RaceResultsBlazor.Models.Models
             this.CalculateTeamResults = info.CalculateTeamResults;
         }
 
-        public void UpdateStatus(bool hasDrivers, bool hasTeams, bool hasRaces)
+        public void UpdateStatus(bool hasDrivers, bool hasRaces)
         {
             this.hasDrivers = hasDrivers;
-            this.hasTeams = hasTeams;
             this.hasRaces = hasRaces;
         }
 

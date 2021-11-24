@@ -1,16 +1,30 @@
-﻿namespace RaceResultsBlazor.Models.Models
+﻿using RaceResultsBlazor.Models.DataModels;
+
+namespace RaceResultsBlazor.Models.Models
 {
     public class DriverResult
     {
-        public int DriverId { get; set; }
+        public DriverResult(RaceResultCsvModel raceResult, string position, ScoringMatrix scoring, bool isFastest, bool isPole, Driver driver)
+        {
+            this.Driver = driver;
+            this.Position = position;
+            this.IsPointsFinish = scoring?.IsPointsFinish(position) ?? false;
+            this.ExcludeFromCountback = scoring?.ExcludeFromCountback ?? false;
+            this.IsFastestLap = isFastest;
+            this.IsPolePosition = isPole;
+        }
 
-        public string Position { get; set; }
+        public Driver Driver { get; }
 
-        public bool IsFastestLap { get; set; }
+        public string Position { get; }
 
-        public bool IsPointsFinish { get; set; }
+        public bool IsFastestLap { get; }
 
-        public bool ExcludeFromCountback { get; set; }
+        public bool IsPolePosition { get; }
+
+        public bool IsPointsFinish { get; }
+
+        public bool ExcludeFromCountback { get; }
 
         public string GetClasses()
         {
@@ -33,7 +47,7 @@
                     };
                 }
             }
-            else if (!string.IsNullOrEmpty(Position))
+            else if (!string.IsNullOrWhiteSpace(Position))
             {
                 classes = string.Join(' ', classes, "other-result");
             }

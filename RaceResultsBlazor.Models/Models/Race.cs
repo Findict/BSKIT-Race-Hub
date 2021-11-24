@@ -2,34 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using RaceResultsBlazor.Models.DataModels;
+using RaceResultsBlazor.Utils.Helpers;
 
 namespace RaceResultsBlazor.Models.Models
 {
     public class Race
     {
-        public Race(RaceCsvModel raceCsvModel, List<RaceResultCsvModel> raceResultCsvModels, SeriesInfo info)
+        public Race(RaceCsvModel raceCsvModel, List<RaceResultCsvModel> raceResultCsvModels, List<DriverCsvModel> driverCsvModels, SeriesInfo info)
         {
             this.Number = raceCsvModel.Number;
+            this.Title = raceCsvModel.Title;
             this.TrackName = raceCsvModel.TrackName;
-            this.Country = raceCsvModel.Country;
+            this.Flag = FlagHelper.ImageFromString(raceCsvModel.Country);
+            this.Background = raceCsvModel.Background;
+            this.TrackMap = raceCsvModel.TrackMap;
             this.RaceLength = raceCsvModel.RaceLength;
             this.StartingTime = raceCsvModel.StartTime;
             this.Scoring = info.ScoringMatrices.FirstOrDefault(s => s.Id == raceCsvModel.ScoringId);
-            this.Results = raceResultCsvModels?.Select(r => new DriverResult
-            {
-                DriverId = r.Driver,
-                Position = r.GetRaceArray()[this.Number - 1],
-                IsPointsFinish = this.Scoring?.IsPointsFinish(r.GetRaceArray()[this.Number - 1]) ?? false,
-                ExcludeFromCountback = this.Scoring?.ExcludeFromCountback ?? false,
-                IsFastestLap = r.Driver == raceCsvModel.Fastest
-            }).ToList();
+            this.FastestLapTime = TimeSpan.FromMilliseconds(raceCsvModel.FastestTime);
+            this.PoleLapTime = TimeSpan.FromMilliseconds(raceCsvModel.PoleTime);
+            this.Results = raceResultCsvModels?.Select(r => 
+                new DriverResult(r, r.GetRaceArray()[this.Number - 1]?.Trim(), this.Scoring, r.Driver == raceCsvModel.Fastest, r.Driver == raceCsvModel.Pole, new Driver(driverCsvModels.FirstOrDefault(d => d.Id == r.Driver))))
+                .ToList();
         }
 
         public int Number { get; }
 
+        public string Title { get; }
+
         public string TrackName { get; }
 
-        public string Country { get; }
+        public string Flag { get; }
+
+        public string Background { get; }
+
+        public string TrackMap { get; }
 
         public string RaceLength { get; }
 
@@ -37,13 +44,17 @@ namespace RaceResultsBlazor.Models.Models
 
         public ScoringMatrix Scoring { get; }
 
-        public List<DriverResult> Results { get; set; }
+        public TimeSpan FastestLapTime { get; }
+
+        public TimeSpan PoleLapTime { get; }
+
+        public List<DriverResult> Results { get; }
 
         public int GetDriverScore(int driverId)
         {
             if (this.Scoring != null)
             {
-                var result = this.Results.FirstOrDefault(r => r.DriverId == driverId);
+                var result = this.Results.FirstOrDefault(r => r.Driver.Number == driverId);
 
                 if (result != null)
                 {

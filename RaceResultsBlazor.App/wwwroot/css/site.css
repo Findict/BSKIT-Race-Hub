@@ -1,11 +1,19 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+:root {
+    --primary-light: #5c0a71;
+    --primary-default: #490859;
+    --primary-dark: #350642;
+    --primary-darker: #1b0321;
+    --background-default: #181818;
+}
+
 html, body {
     height: 100%;
 }
 
 body {
-    background-color: #181818;
+    background-color: var(--background-default);
 }
 
 a, .btn-link {
@@ -14,7 +22,7 @@ a, .btn-link {
 
 .custom-btn-primary {
     color: #fff;
-    background-color: #3a0647;
+    background-color: var(--primary-default);
     padding: 8px;
     border-radius: 8px;
     text-align: center;
@@ -25,12 +33,12 @@ a, .btn-link {
 
     .custom-btn-primary:hover {
         color: #fff;
-        background-color: #5c0a71;
+        background-color: var(--primary-light);
         text-decoration: none;
     }
 
     .custom-btn-primary:active {
-        background-color: #26042f !important;
+        background-color: var(--primary-dark);
     }
 
 .central-section {

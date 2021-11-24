@@ -19,27 +19,27 @@ namespace RaceResultsBlazor.Models.Models
             this.driverRecords = DataFileHelper.GetCsvData<DriverCsvModel>(this.Info.DriverLocation);
             this.teamsRecords = DataFileHelper.GetCsvData<TeamCsvModel>(this.Info.TeamsLocation);
             var raceResultsRecords = DataFileHelper.GetCsvData<RaceResultCsvModel>(this.Info.RaceResultsLocation);
-            this.racesRecords = DataFileHelper.GetCsvData<RaceCsvModel>(this.Info.RacesLocation)?.Select(r => new Race(r, raceResultsRecords, this.Info)).ToList();
+            this.racesRecords = DataFileHelper.GetCsvData<RaceCsvModel>(this.Info.RacesLocation)?.Select(r => new Race(r, raceResultsRecords, driverRecords, this.Info)).ToList();
 
-            this.Info.UpdateStatus(this.driverRecords != null, this.teamsRecords != null, this.racesRecords != null);
+            this.Info.UpdateStatus(this.driverRecords != null, this.racesRecords != null);
         }
 
         public SeriesInfo Info { get; private set; }
 
         public List<DriverLine> GetDriverResults()
         {
-            var teams = this.teamsRecords?.Select(t => new Team(t, CountryToAssetUrl)).ToList();
+            var teams = this.teamsRecords?.Select(t => new Team(t)).ToList();
 
             var drivers =  this.driverRecords.Select(record => new DriverLine
             {
                 Id = record.Id,
                 Name = record.Name,
                 Team = teams?.FirstOrDefault(t => t.Name == record.Team) ?? new Team(record.Team),
-                CountryFlag = CountryToAssetUrl(record.Country),
+                Flag = record.Flag,
                 TotalPoints = this.racesRecords.Select(race => race.GetDriverScore(record.Id))
                     .OrderByDescending(s => s)
                     .Take(this.Info.MaxRacesToCount).Sum(),
-                Results = this.racesRecords.Select(race => race.Results.FirstOrDefault(result => result.DriverId == record.Id)).ToList()
+                Results = this.racesRecords.Select(race => race.Results.FirstOrDefault(result => result.Driver.Number == record.Id)).ToList()
             }).ToList();
 
             foreach (var driver in drivers)
@@ -66,7 +66,7 @@ namespace RaceResultsBlazor.Models.Models
         public List<Team> GetTeamResults()
         {
             var teams = this.teamsRecords.Where(t => !t.ForceHide)
-                .Select(t => new Team(t, CountryToAssetUrl)).ToList();
+                .Select(t => new Team(t)).ToList();
 
             if (this.Info.CalculateTeamResults && this.Info.ContainsDriverResults)
             {
@@ -103,11 +103,6 @@ namespace RaceResultsBlazor.Models.Models
         }
 
         public List<string> GetRaceImages()
-            => this.racesRecords.Select(r => CountryToAssetUrl(r.Country)).ToList();
-
-        
-
-        private static string CountryToAssetUrl(string country)
-            => $"assets/flags/{country?.ToLower().Trim().Replace(' ', '-') ?? string.Empty}.png";
+            => this.racesRecords.Select(r => r.Flag).ToList();
     }
 }

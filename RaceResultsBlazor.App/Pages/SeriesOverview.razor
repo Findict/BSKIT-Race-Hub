@@ -1,7 +1,11 @@
 ﻿@page "/series/{title}"
 
 @using RaceResultsBlazor.App.Services
+@using RaceResultsBlazor.App.Components
+
+@inject IJSRuntime JsRuntime
 @inject ResultsService ResultsService
+@inject TimeZoneService TimeZoneService
 
 <section class="central-section">
     <h2>@InfoViewModel.Title</h2>
@@ -20,31 +24,29 @@
     {
         <section class="sub-section">
             <h3 class="toggelable-header my-0" @onclick="this.InfoViewModel.ToggleCalendar">
-            Calendar <span class="oi expand-icon @this.InfoViewModel.CalendarCollapseButtonClass mr-2" />
+                Calendar <span class="oi expand-icon @this.InfoViewModel.CalendarCollapseButtonClass mr-2" />
             </h3>
             <div class="thin-separator mb-2" />
 
-            <div class="@this.InfoViewModel.CalendarClass">
-                @foreach (var race in this.InfoViewModel.Races)
-                {
-                    <div>@race.TrackName - @race.RaceLength - @this.GetRaceDateString(race.StartingTime)</div>
-                }
-                <div class="thicc-separator mt-1" />
-            </div>
+            @if (this.CalendarIsLoading)
+            {
+                <div>Loading...</div>
+            }
+            else
+            {
+                <div class="calendar-container @this.InfoViewModel.CalendarClass">
+                    @foreach (var race in this.InfoViewModel.Races)
+                    {
+                        <CalendarItem Race="race" UserTimeOffset="this.userOffset" />
+                    }
+                    <div class="thicc-separator mt-1" />
+                </div>
+            }
         </section>
     }
 
     @foreach (var seriesSection in this.InfoViewModel.Sections)
     {
-        <section class="sub-section">
-            <h3 class="toggelable-header my-0" @onclick="seriesSection.ToggleText">@seriesSection.Title <span class="oi expand-icon @seriesSection.CollapseButtonClass mr-2" /></h3>
-            
-            <div class="thin-separator mb-2" />
-
-            <div class="@seriesSection.TextClass">
-                @((MarkupString)seriesSection.Content)
-                <div class="thicc-separator mt-1" />
-            </div>
-        </section>
+        <ArticleSection Section="seriesSection" />
     }
 </section>

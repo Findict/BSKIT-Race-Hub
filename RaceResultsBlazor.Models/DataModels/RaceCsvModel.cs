@@ -4,18 +4,30 @@ namespace RaceResultsBlazor.Models.DataModels
 {
     public class RaceCsvModel
     {
-        public int Number { get; set; }
+        public int Number { get; init; }
 
-        public string TrackName { get; set; }
+        public string Title { get; init; }
 
-        public string Country { get; set; }
+        public string TrackName { get; init; }
 
-        public string RaceLength { get; internal set; }
+        public string Country { get; init; }
 
-        public DateTimeOffset StartTime { get; set; }
+        public string Background { get; init; }
 
-        public int Fastest { get; set; }
+        public string TrackMap { get; init; }
 
-        public int ScoringId { get; set; }
+        public string RaceLength { get; init; }
+
+        public DateTimeOffset StartTime { get; init; }
+
+        public int Fastest { get; init; }
+
+        public int FastestTime { get; init; }
+
+        public int Pole { get; init; }
+
+        public int PoleTime { get; init; }
+
+        public int ScoringId { get; init; }
     }
 }
