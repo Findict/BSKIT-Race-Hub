@@ -82,7 +82,6 @@
     align-items: center;
     flex-wrap: nowrap;
     gap: 8px;
-    /*background-image: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary-default) 80%);*/
     background-color: var(--primary-default);
     border-radius: 10px;
     padding: 4px;
@@ -102,8 +101,14 @@
     text-overflow: ellipsis;
 }
 
-.calendar-item-flag {
+.calendar-item-race-day {
     margin-left: auto;
+    font-size: 1.25rem;
+    white-space: nowrap;
+}
+
+.calendar-item-flag {
+    margin-left: 8px;
 }
 
 .calendar-track-flag {

@@ -35,11 +35,18 @@ namespace RaceResultsBlazor.App.Components
             return base.OnParametersSetAsync();
         }
 
-        protected string GetRaceDateString(DateTimeOffset dateTime)
+        protected string GetRaceDateTimeString(DateTimeOffset dateTime)
         {
             var localDateTime = dateTime.ToOffset(this.UserTimeOffset);
 
             return $"{localDateTime:f} (UTC{localDateTime:zzz})";
+        }
+
+        protected string GetRaceDayString(DateTimeOffset dateTime)
+        {
+            var localDateTime = dateTime.ToOffset(this.UserTimeOffset);
+
+            return $"{localDateTime:d MMM yyyy}";
         }
 
         protected string GetLapTimeString(TimeSpan lapTime)
