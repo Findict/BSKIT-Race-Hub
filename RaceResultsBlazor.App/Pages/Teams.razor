@@ -19,7 +19,9 @@
                     <div class="team-name">
                         <span class="flagged-name-span">@teamResult.Name</span>
                         @if (teamResult.HasValidCountry)
-                        {<img class="team-flag" src="@teamResult.Country" />}
+                        {
+                            <img class="team-flag" src="@teamResult.Country" />
+                        }
                     </div>
                     <div class="drivers">
                         @foreach (var driver in drivers.DriverResults.Where(d => d.Team.Name == teamResult.Name))
@@ -28,7 +30,9 @@
                                 <span class="driver-number">@driver.Id</span>
                                 <span class="flagged-name-span">@driver.Name</span>
                                 @if (@driver.HasValidCountry)
-                                {<img class="driver-flag" src="@driver.Flag" />}
+                                {
+                                    <img class="driver-flag" src="@driver.Flag" />
+                                }
                             </div>
                         }
                     </div>
