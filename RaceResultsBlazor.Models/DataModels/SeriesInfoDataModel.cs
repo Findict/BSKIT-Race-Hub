@@ -12,6 +12,8 @@
 
         public bool HideCalendar { get; set; }
 
+        public bool IsPublished { get; internal set; }
+
         public ScoringMatrixDataModel[] ScoringMatrices { get; set; }
 
         public int? MaxRacesToCount { get; set; }

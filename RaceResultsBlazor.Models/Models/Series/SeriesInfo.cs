@@ -29,6 +29,7 @@ namespace RaceResultsBlazor.Models.Models
             this.Sections = info.Sections?.Select(s => new SeriesSection(s)).ToList();
             this.HideCalendar = info.HideCalendar;
             this.InternalLinks = info.InternalLinks?.Select(l => new Link(l)).ToList() ?? new List<Link>();
+            this.IsPublished = info.IsPublished;
 
             this.ScoringMatrices = info.ScoringMatrices?.Select(m => new ScoringMatrix(m)).ToList() ?? new List<ScoringMatrix>();
             this.CalculateTeamResults = info.CalculateTeamResults;
@@ -57,6 +58,8 @@ namespace RaceResultsBlazor.Models.Models
         public int MaxRacesToCount { get; internal set; }
 
         public bool CalculateTeamResults { get; private set; }
+
+        public bool IsPublished { get; internal set; }
 
         public string BaseLink
             => $@"series/{this.Name}";
