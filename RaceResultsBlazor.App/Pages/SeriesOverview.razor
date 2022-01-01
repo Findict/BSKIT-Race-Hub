@@ -4,13 +4,14 @@
 @using RaceResultsBlazor.App.Components
 
 @inject IJSRuntime JsRuntime
+@inject NavigationManager NavManager
 @inject ResultsService ResultsService
 @inject TimeZoneService TimeZoneService
 
 <section class="central-section">
     <h2>@InfoViewModel.Title</h2>
 
-    @if (this.InfoViewModel.InternalLinks.Any())
+    @if (this.InfoViewModel?.InternalLinks?.Any() ?? false)
     {
         <div class="nav-btn-bar mb-2">
             @foreach (var link in this.InfoViewModel.InternalLinks)
@@ -20,7 +21,7 @@
         </div>
     }
 
-    @if (!this.InfoViewModel.HideCalendar && this.InfoViewModel.Races.Count() > 0)
+    @if (this.InfoViewModel != null && !this.InfoViewModel.HideCalendar && this.InfoViewModel.Races.Count() > 0)
     {
         <section class="sub-section">
             <h3 class="toggelable-header my-0" @onclick="this.InfoViewModel.ToggleCalendar">
@@ -45,8 +46,11 @@
         </section>
     }
 
-    @foreach (var seriesSection in this.InfoViewModel.Sections)
+    @if (this.InfoViewModel != null)
     {
-        <ArticleSection Section="seriesSection" />
+        @foreach (var seriesSection in this.InfoViewModel.Sections)
+        {
+            <ArticleSection Section="seriesSection" />
+        }
     }
 </section>

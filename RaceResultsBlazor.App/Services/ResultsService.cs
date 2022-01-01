@@ -47,7 +47,7 @@ namespace RaceResultsBlazor.App.Services
 
             if (series == null)
             {
-                return null;
+                return Task.FromResult((SeriesInfoViewModel)null);
             }
 
             var info = new SeriesInfoViewModel(series.Info, series.GetRaces());
@@ -89,7 +89,7 @@ namespace RaceResultsBlazor.App.Services
                 this.RefreshData();
             }
 
-            return Task.FromResult(this.seriesRecords.Select(r => r.Info).OrderBy(r => r.Index).ToArray());
+            return Task.FromResult(this.seriesRecords.Select(r => r.Info).Where(i => i.IsPublished).OrderBy(r => r.Index).ToArray());
         }
     }
 }

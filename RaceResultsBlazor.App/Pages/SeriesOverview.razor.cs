@@ -23,7 +23,16 @@ namespace RaceResultsBlazor.App.Pages
 
         protected override async Task OnParametersSetAsync()
         {
-            this.InfoViewModel = await this.ResultsService.GetSeriesInfoAsync(this.Title);
+            var infoVM = await this.ResultsService.GetSeriesInfoAsync(this.Title);
+
+            if (infoVM == null || !infoVM.IsPublished)
+            {
+                this.NavManager.NavigateTo(string.Empty);
+                this.InfoViewModel = new SeriesInfoViewModel(null, null);
+                return;
+            }
+
+            this.InfoViewModel = infoVM;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

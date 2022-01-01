@@ -14,10 +14,15 @@ html, body {
 
 body {
     background-color: var(--background-default);
+    color: white;
 }
 
 a, .btn-link {
     color: #0366d6;
+}
+
+table {
+    border-collapse: separate;
 }
 
 .custom-btn-primary {
@@ -29,6 +34,7 @@ a, .btn-link {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-decoration: none;
 }
 
     .custom-btn-primary:hover {

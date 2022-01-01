@@ -9,11 +9,12 @@ namespace RaceResultsBlazor.Models.ViewModels
     {
         public SeriesInfoViewModel(SeriesInfo info, List<Race> races)
         {
-            this.Title = info.LongTitle;
+            this.Title = info?.LongTitle;
             this.Races = races?.Select(r => new RaceCalendarItemViewModel(r)).ToList() ?? new List<RaceCalendarItemViewModel>();
-            this.Sections = info.Sections?.Select(s => new SeriesSectionViewModel(s)).ToList() ?? new List<SeriesSectionViewModel>();
-            this.InternalLinks = info.InternalLinks;
-            this.HideCalendar = info.HideCalendar;
+            this.Sections = info?.Sections?.Select(s => new SeriesSectionViewModel(s)).ToList() ?? new List<SeriesSectionViewModel>();
+            this.InternalLinks = info?.InternalLinks;
+            this.HideCalendar = info?.HideCalendar ?? true;
+            this.IsPublished = info?.IsPublished ?? false;
         }
 
         public string Title { get; }
@@ -25,6 +26,8 @@ namespace RaceResultsBlazor.Models.ViewModels
         public List<Link> InternalLinks { get; }
 
         public bool HideCalendar { get; }
+
+        public bool IsPublished { get; }
 
         public bool CalendarIsHidden { get; private set; } = false;
 

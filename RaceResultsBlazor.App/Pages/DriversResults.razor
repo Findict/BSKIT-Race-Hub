@@ -1,64 +1,50 @@
 @page "/series/{title}/drivers/results"
 
-@using RaceResultsBlazor.Models.ViewModels
 @using RaceResultsBlazor.App.Services
+@inject NavigationManager NavManager
 @inject ResultsService ResultsService
 
 @if (results == null)
 {
-<p><em>Loading...</em></p>
+    <p><em>Loading...</em></p>
 }
 else
 {
-<div class="overview-table" style="background-image: url(@results.BackgroundPath)">
-    <table>
-        <thead>
-            <tr>
-                <th class="position-head"></th>
-                <th class="driver-head">Driver</th>
-                <th class="team-head">Team</th>
-                @foreach (var flagUrl in results.RaceImagePaths)
-                {
-                    <th class="track-flag-head"><img class="track-flag" src="@flagUrl" /></th>
-                }
-            </tr>
-        </thead>
+    <div class="overview-table" style="background-image: url(@results.BackgroundPath)">
+        <table>
+            <thead>
+                <tr>
+                    <th class="position-head"></th>
+                    <th class="driver-head">Driver</th>
+                    <th class="team-head">Team</th>
+                    @foreach (var flagUrl in results.RaceImagePaths)
+                    {
+                        <th class="track-flag-head"><img class="track-flag" src="@flagUrl" /></th>
+                    }
+                </tr>
+            </thead>
 
-        <tbody>
-            @foreach (var driverResult in results.DriverResults)
+            <tbody>
+                @foreach (var driverResult in results.DriverResults)
                 {
-            <tr>
-                <td class="position">@driverResult.Position</td>
-                <td class="flagged-name">
-                    <span class="flagged-name-span">@driverResult.Name</span> @if (@driverResult.HasValidCountry) { <img class="driver-flag" src="@driverResult.Flag" /> }
-                </td>
-                <td class="@driverResult.Team.GetClasses()" style="border-color: @driverResult.Team.GetColor()">@driverResult.Team.Name</td>
-                @foreach (var raceResult in driverResult.Results)
+                    <tr>
+                        <td class="position">@driverResult.Position</td>
+                        <td class="flagged-name">
+                            <span class="flagged-name-span">@driverResult.Name</span> 
+                            @if (@driverResult.HasValidCountry)
+                            {
+                                <img class="driver-flag" src="@driverResult.Flag" />
+                            }
+                        </td>
+                        <td class="@driverResult.Team.GetClasses()" style="border-color: @driverResult.Team.GetColor()">@driverResult.Team.Name</td>
+                        @foreach (var raceResult in driverResult.Results)
                         {
-                <td class="@raceResult.GetClasses()">@raceResult.Position</td>
+                            <td class="@raceResult.GetClasses()">@raceResult.Position</td>
                         }
-                <td class="totals">@driverResult.TotalPoints</td>
-            </tr>
+                        <td class="totals">@driverResult.TotalPoints</td>
+                    </tr>
                 }
-        </tbody>
-    </table>
-</div>
-}
-
-@code {
-    private DriverResultsViewModel results;
-
-    [Parameter]
-    public string Title { get; set; }
-
-    protected override async Task OnParametersSetAsync()
-    {
-        await this.UpdateData();
-    }
-
-    private async Task UpdateData()
-    {
-        results = await ResultsService.GetDriverResultsAsync(Title);
-        this.StateHasChanged();
-    }
+            </tbody>
+        </table>
+    </div>
 }

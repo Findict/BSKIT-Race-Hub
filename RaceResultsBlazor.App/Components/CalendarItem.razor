@@ -10,6 +10,9 @@
         <div class="calendar-item-title">
             @this.Race.Title
         </div>
+        <div class="calendar-item-race-day">
+            @this.GetRaceDayString(this.Race.StartingTime)
+        </div>
         <div class="calendar-item-flag">
             <img class="calendar-track-flag" src="@this.Race.Flag" />
         </div>
@@ -32,7 +35,7 @@
 
             @if (this.Race.StartingTime != DateTimeOffset.MinValue)
             {
-                <div><strong>Start Time:</strong> @this.GetRaceDateString(this.Race.StartingTime)</div>
+                <div><strong>Start Time:</strong> @this.GetRaceDateTimeString(this.Race.StartingTime)</div>
             }
 
             @if (this.Race.Results.Any())
