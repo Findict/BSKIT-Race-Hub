@@ -23,6 +23,7 @@ namespace RaceResultsBlazor.App
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<ResultsService>();
+            services.AddSingleton<ClassQualifyingService>();
             services.AddScoped<TimeZoneService>();
         }
 

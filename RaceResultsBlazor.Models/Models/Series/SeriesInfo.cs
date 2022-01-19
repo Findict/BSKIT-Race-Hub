@@ -30,6 +30,7 @@ namespace RaceResultsBlazor.Models.Models
             this.HideCalendar = info.HideCalendar;
             this.InternalLinks = info.InternalLinks?.Select(l => new Link(l)).ToList() ?? new List<Link>();
             this.IsPublished = info.IsPublished;
+            this.ClassQualifyingData = info.ClassQualifyingData != null ? new ClassQualifyingData(info.ClassQualifyingData) : null;
 
             this.ScoringMatrices = info.ScoringMatrices?.Select(m => new ScoringMatrix(m)).ToList() ?? new List<ScoringMatrix>();
             this.CalculateTeamResults = info.CalculateTeamResults;
@@ -61,6 +62,10 @@ namespace RaceResultsBlazor.Models.Models
 
         public bool IsPublished { get; internal set; }
 
+        public ClassQualifyingData ClassQualifyingData { get; private set; }
+
+        public DateTime QualyLastUpdated { get; private set; }
+
         public string BaseLink
             => $@"series/{this.Name}";
 
@@ -83,5 +88,8 @@ namespace RaceResultsBlazor.Models.Models
 
         public string SeriesInfoLocation
             => @$"wwwroot\data\{this.Name}\info.json";
+
+        public void QualyDataUpdated()
+            => this.QualyLastUpdated = DateTime.Now;
     }
 }

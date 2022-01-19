@@ -1,0 +1,38 @@
+﻿@page "/series/{title}/qualifying"
+
+@using RaceResultsBlazor.App.Services
+@inject NavigationManager NavManager
+@inject ClassQualifyingService ClassQualifyingService
+@inject ResultsService ResultsService
+
+<div class="stretched-section qualy-background-image" style="background-image: url(@infoVM.ClassQualifyingData.BackgroundImagePath)">
+
+    @if (!this.hasLoaded)
+    {
+        <h3>ClassQualifying</h3>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Driver</th>
+                    <th>Valid</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var driver in drivers)
+                {
+                <tr>
+                    <td class="@driver.DisplayClass">@driver.DriverName</td>
+                    <td>@driver.ValidLaps</td>
+                    <td>@driver.TotalLaps</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>

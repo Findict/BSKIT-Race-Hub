@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ACCProjects.Utils" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RaceResultsBlazor.Utils\RaceResultsBlazor.Utils.csproj" />
   </ItemGroup>
 
