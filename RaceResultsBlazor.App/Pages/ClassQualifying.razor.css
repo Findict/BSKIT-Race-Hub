@@ -31,3 +31,9 @@ td, th {
     background: linear-gradient( 270deg, #cc0000e0, #000000e0 48px);
     padding-right: 32px;
 }
+
+h3 {
+    background-color: #000000e0;
+    border-radius: 8px;
+    padding: 4px 8px;
+}
