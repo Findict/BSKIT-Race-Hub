@@ -9,5 +9,7 @@
         public string Track { get; init; }
 
         public string BackgroundImagePath { get; init; }
+
+        public bool RevealLapTimes { get; init; }
     }
 }

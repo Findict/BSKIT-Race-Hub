@@ -43,7 +43,16 @@ namespace RaceResultsBlazor.App.Pages
 
         private async Task UpdateData()
         {
-            drivers = (await ClassQualifyingService.GetResults(this.infoVM.ClassQualifyingData)).OrderByDescending(d => d.Laps.Count(l => l.IsValidForBest)).ToArray();
+            drivers = (await ClassQualifyingService.GetResults(this.infoVM.ClassQualifyingData))
+                .OrderByDescending(d => d.ValidLaps)
+                .ThenByDescending(d => d.TotalLaps)
+                .ThenBy(d => d.RaceNumber).ToArray();
+
+            if (this.infoVM.ClassQualifyingData.RevealLapTimes)
+            {
+                drivers = drivers.OrderByDescending(d => d.HasTimeSet).ThenBy(d => d.BestLapTime).ToArray();
+            }
+
             this.StateHasChanged();
         }
     }

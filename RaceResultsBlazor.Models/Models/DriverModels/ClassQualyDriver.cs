@@ -9,7 +9,7 @@ namespace RaceResultsBlazor.Models.Models.DriverModels
     public class ClassQualyDriver
     {
 
-        public ClassQualyDriver(string playerId, long? raceNumber, long? carModel, string driver)
+        public ClassQualyDriver(string playerId, long? raceNumber, int? carModel, string driver)
         {
             this.Id = playerId;
             this.RaceNumber = raceNumber;
@@ -21,7 +21,7 @@ namespace RaceResultsBlazor.Models.Models.DriverModels
 
         public long? RaceNumber { get; }
 
-        public long? CarModelId { get; }
+        public int? CarModelId { get; }
 
         public string DriverName { get; }
 
@@ -33,11 +33,14 @@ namespace RaceResultsBlazor.Models.Models.DriverModels
         public bool HasTimeSet
             => this.Laps.Any(l => l.IsValidForBest);
 
+        public TimeSpan BestLapTime
+            => TimeSpan.FromMilliseconds(this.HasTimeSet ? this.Laps.Where(l => l.IsValidForBest).Min(l => l.Laptime) : 0);
+
         public int ValidLaps
             => this.Laps.Count(l => l.IsValidForBest);
 
         public int TotalLaps
-            => this.Laps.Count();
+            => this.Laps.Count;
 
         public void AddLaps(List<Lap> laps)
             => this.Laps.AddRange(laps);

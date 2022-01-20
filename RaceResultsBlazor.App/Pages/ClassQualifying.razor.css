@@ -37,3 +37,12 @@ h3 {
     border-radius: 8px;
     padding: 4px 8px;
 }
+
+.lap-count {
+    text-align-last: end;
+}
+
+.race-number {
+    font-weight: bold;
+    text-align-last: end;
+}

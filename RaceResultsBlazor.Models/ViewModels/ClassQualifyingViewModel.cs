@@ -11,6 +11,7 @@ namespace RaceResultsBlazor.Models.ViewModels
             this.ResultsFilesLocation = classQualifyingData.ResultsFilesLocation;
             this.Track = classQualifyingData.Track;
             this.BackgroundImagePath = classQualifyingData.BackgroundImagePath;
+            this.RevealLapTimes = classQualifyingData.RevealLapTimes;
         }
 
         public string EntrylistUrl { get; }
@@ -20,5 +21,7 @@ namespace RaceResultsBlazor.Models.ViewModels
         public string Track { get; }
 
         public string BackgroundImagePath { get; }
+
+        public bool RevealLapTimes { get; }
     }
 }
