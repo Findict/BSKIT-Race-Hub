@@ -5,10 +5,9 @@
 
 .overview-table {
     background-size: cover;
-    height: 100%;
     display: flex;
     justify-content: center;
-    width: 100%;
+    padding: 32px 8px;
 }
 
 .team-overview-list {
@@ -36,12 +35,6 @@ td, th {
 .position-head {
     width: 32px;
     background-color: transparent;
-}
-
-.driver-head {
-}
-
-.team-head {
 }
 
 .points-head {

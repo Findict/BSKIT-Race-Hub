@@ -4,13 +4,13 @@
 @inject NavigationManager NavManager
 @inject ResultsService ResultsService
 
+<div class="stretched-section overview-table" style="background-image: url('@this.results.BackgroundPath')">
 @if (this.results == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <div class="overview-table" style="background-image: url('@this.results.BackgroundPath')">
         <table>
             <thead>
                 <tr>
@@ -37,5 +37,5 @@ else
                 }
             </tbody>
         </table>
-    </div>
 }
+</div>
