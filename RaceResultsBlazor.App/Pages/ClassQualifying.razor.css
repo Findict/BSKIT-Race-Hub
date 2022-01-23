@@ -46,3 +46,30 @@ h3 {
     font-weight: bold;
     text-align-last: end;
 }
+
+.driver-number {
+    margin: -2px 8px -2px -6px;
+    height: 28px;
+    width: 40px;
+    border-radius: 6px 0px 0px 6px;
+    display: flex;
+    float: left;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+}
+
+.silver-class {
+    background: #6a6a6a;
+    color: #ffffff;
+}
+
+.pro-class {
+    background: #ffffff;
+    color: #000000;
+}
+
+.am-class {
+    background: #ff0000;
+    color: #ffffff;
+}

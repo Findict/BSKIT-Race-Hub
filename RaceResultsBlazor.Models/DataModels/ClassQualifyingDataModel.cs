@@ -11,5 +11,7 @@
         public string BackgroundImagePath { get; init; }
 
         public bool RevealLapTimes { get; init; }
+
+        public string ClassFile { get; init; }
     }
 }

@@ -19,11 +19,15 @@ namespace RaceResultsBlazor.Models.Models.DriverModels
 
         public string Id { get; }
 
+        public int Position { get; set; }
+
         public long? RaceNumber { get; }
 
         public int? CarModelId { get; }
 
         public string DriverName { get; }
+
+        public int? DriverClass { get; set; }
 
         public List<Lap> Laps { get; private set; } = new();
 
@@ -49,5 +53,19 @@ namespace RaceResultsBlazor.Models.Models.DriverModels
             => !this.HasTimeSet ? "no-laps" :
                 this.ValidLaps < 5 ? "in-progress" :
                 "laps-done";
+
+        public string ClassString
+        {
+            get
+            {
+                return this.DriverClass switch
+                {
+                    0 => "am-class",
+                    1 => "silver-class",
+                    3 => "pro-class",
+                    _ => "silver-class",
+                };
+            }
+        }
     }
 }

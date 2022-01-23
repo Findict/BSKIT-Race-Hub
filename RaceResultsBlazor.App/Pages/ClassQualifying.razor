@@ -16,12 +16,15 @@
         <table>
             <thead>
                 <tr>
-                    <th class="visually-hidden"></th>
+                    @if (infoVM.ClassQualifyingData.RevealLapTimes)
+                    {
+                        <th class="visually-hidden"></th>
+                    }
                     <th>Driver</th>
                     <th>Registered Car</th>
                     @if (infoVM.ClassQualifyingData.RevealLapTimes)
                     {
-                        <th>Best Laptime</th>
+                        <th>Best Lap</th>
                     }
                     <th>Valid</th>
                     @if (!infoVM.ClassQualifyingData.RevealLapTimes)
@@ -35,8 +38,11 @@
                 @foreach (var driver in drivers)
                 {
                 <tr>
-                    <td class="race-number">@driver.RaceNumber</td>
-                    <td class="@driver.DisplayClass">@driver.DriverName</td>
+                    @if (infoVM.ClassQualifyingData.RevealLapTimes)
+                    {
+                        <td class="race-number">@driver.Position</td>
+                    }
+                    <td class="@driver.DisplayClass"><span class="driver-number @driver.ClassString">@driver.RaceNumber</span>@driver.DriverName</td>
                     <td>@driver.CarModel</td>
                     @if (infoVM.ClassQualifyingData.RevealLapTimes)
                     {

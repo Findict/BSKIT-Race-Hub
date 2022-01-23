@@ -51,6 +51,11 @@ namespace RaceResultsBlazor.App.Pages
             if (this.infoVM.ClassQualifyingData.RevealLapTimes)
             {
                 drivers = drivers.OrderByDescending(d => d.HasTimeSet).ThenBy(d => d.BestLapTime).ToArray();
+
+                foreach (var driver in drivers)
+                {
+                    driver.Position = drivers.Count(d => (driver.HasTimeSet ? (d.HasTimeSet && d.BestLapTime < driver.BestLapTime) : d.HasTimeSet)) + 1;
+                }
             }
 
             this.StateHasChanged();
