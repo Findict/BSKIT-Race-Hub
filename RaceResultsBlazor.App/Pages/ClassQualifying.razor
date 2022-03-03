@@ -25,6 +25,7 @@
                     @if (infoVM.ClassQualifyingData.RevealLapTimes)
                     {
                         <th>Best Lap</th>
+                        <th>Gap</th>
                     }
                     <th>Valid</th>
                     @if (!infoVM.ClassQualifyingData.RevealLapTimes)
@@ -47,6 +48,7 @@
                     @if (infoVM.ClassQualifyingData.RevealLapTimes)
                     {
                         <td class="lap-count">@driver.BestLapTime.ToString(@"m\:ss\.fff")</td>
+                        <td class="lap-count">@driver.Gap.ToString(@"\+s\.fff")</td>
                     }
                     <td class="lap-count">@driver.ValidLaps</td>
                     @if (!infoVM.ClassQualifyingData.RevealLapTimes)

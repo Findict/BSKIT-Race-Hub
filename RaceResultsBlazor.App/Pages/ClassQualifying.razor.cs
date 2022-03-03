@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using RaceResultsBlazor.Models.Models.DriverModels;
@@ -52,9 +53,12 @@ namespace RaceResultsBlazor.App.Pages
             {
                 drivers = drivers.OrderByDescending(d => d.HasTimeSet).ThenBy(d => d.BestLapTime).ToArray();
 
+                var bestTime = drivers.Where(d => d.ValidLaps > 0).Min(d => d.BestLapTime);
+
                 foreach (var driver in drivers)
                 {
                     driver.Position = drivers.Count(d => (driver.HasTimeSet ? (d.HasTimeSet && d.BestLapTime < driver.BestLapTime) : d.HasTimeSet)) + 1;
+                    driver.Gap = driver.HasTimeSet ? driver.BestLapTime - bestTime : TimeSpan.Zero;
                 }
             }
 

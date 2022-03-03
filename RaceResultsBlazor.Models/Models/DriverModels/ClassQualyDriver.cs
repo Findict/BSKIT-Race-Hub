@@ -29,6 +29,8 @@ namespace RaceResultsBlazor.Models.Models.DriverModels
 
         public int? DriverClass { get; set; }
 
+        public TimeSpan Gap { get; set; }
+
         public List<Lap> Laps { get; private set; } = new();
 
         public string CarModel

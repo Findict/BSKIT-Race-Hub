@@ -31,6 +31,10 @@ namespace RaceResultsBlazor.App.Components
             {
                 this.IsHidden = false;
             }
+            else
+            {
+                this.IsHidden = true;
+            }
 
             return base.OnParametersSetAsync();
         }
