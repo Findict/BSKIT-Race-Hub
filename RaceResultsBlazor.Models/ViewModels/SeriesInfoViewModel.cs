@@ -15,6 +15,7 @@ namespace RaceResultsBlazor.Models.ViewModels
             this.InternalLinks = info?.InternalLinks;
             this.HideCalendar = info?.HideCalendar ?? true;
             this.IsPublished = info?.IsPublished ?? false;
+            this.ClassQualifyingData = info?.ClassQualifyingData != null ? new ClassQualifyingViewModel(info.ClassQualifyingData) : null;
         }
 
         public string Title { get; }
@@ -28,6 +29,8 @@ namespace RaceResultsBlazor.Models.ViewModels
         public bool HideCalendar { get; }
 
         public bool IsPublished { get; }
+
+        public ClassQualifyingViewModel ClassQualifyingData { get; }
 
         public bool CalendarIsHidden { get; private set; } = false;
 

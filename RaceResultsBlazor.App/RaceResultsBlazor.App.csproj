@@ -9,15 +9,37 @@
     <ExcludeFoldersFromDeployment>
       wwwroot\assets; wwwroot\data
     </ExcludeFoldersFromDeployment>
+    <Prefer32Bit>true</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\assets\**" />
+    <Compile Remove="wwwroot\data\**" />
+    <Compile Remove="wwwroot\servers\**" />
+    <Content Remove="wwwroot\assets\**" />
+    <Content Remove="wwwroot\data\**" />
+    <Content Remove="wwwroot\servers\**" />
+    <EmbeddedResource Remove="wwwroot\assets\**" />
+    <EmbeddedResource Remove="wwwroot\data\**" />
+    <EmbeddedResource Remove="wwwroot\servers\**" />
+    <None Remove="wwwroot\assets\**" />
+    <None Remove="wwwroot\data\**" />
+    <None Remove="wwwroot\servers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Pages\ClassQualifying.razor.css" />
     <None Remove="Pages\DriversResults.razor.css" />
     <None Remove="Pages\Teams.razor.css" />
     <None Remove="Pages\TeamsResults.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Pages\ClassQualifying.razor.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="Pages\DriversResults.razor.css">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -37,7 +59,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\assets\tracks\" />
+    <PackageReference Include="ACCProjects.Utils" Version="1.0.1" />
   </ItemGroup>
 
 </Project>

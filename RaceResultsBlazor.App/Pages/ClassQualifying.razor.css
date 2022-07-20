@@ -1,0 +1,75 @@
+﻿.qualy-background-image {
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    padding: 32px 8px;
+    align-items: center;
+}
+
+td, th {
+    border-radius: 8px;
+    text-align: left;
+    padding: 4px 8px;
+    background-color: #000000e0;
+    color: #ffffff;
+    white-space: nowrap;
+    min-height: 32px;
+    height: 32px;
+}
+
+.laps-done {
+    background: linear-gradient( 270deg, #00cc00e0, #000000e0 48px);
+    padding-right: 32px;
+}
+
+.in-progress {
+    background: linear-gradient( 270deg, #cc8500, #000000e0 48px);
+    padding-right: 32px;
+}
+
+.no-laps {
+    background: linear-gradient( 270deg, #cc0000e0, #000000e0 48px);
+    padding-right: 32px;
+}
+
+h3 {
+    background-color: #000000e0;
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+
+.lap-count {
+    text-align-last: end;
+}
+
+.race-number {
+    font-weight: bold;
+    text-align-last: end;
+}
+
+.driver-number {
+    margin: -2px 8px -2px -6px;
+    height: 28px;
+    width: 40px;
+    border-radius: 6px 0px 0px 6px;
+    display: flex;
+    float: left;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+}
+
+.silver-class {
+    background: #6a6a6a;
+    color: #ffffff;
+}
+
+.pro-class {
+    background: #ffffff;
+    color: #000000;
+}
+
+.am-class {
+    background: #ff0000;
+    color: #ffffff;
+}

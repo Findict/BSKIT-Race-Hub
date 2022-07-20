@@ -1,0 +1,64 @@
+﻿@page "/series/{title}/qualifying"
+
+@using RaceResultsBlazor.App.Services
+@inject NavigationManager NavManager
+@inject ClassQualifyingService ClassQualifyingService
+@inject ResultsService ResultsService
+
+<div class="stretched-section qualy-background-image" style="background-image: url(@infoVM.ClassQualifyingData.BackgroundImagePath)">
+
+    @if (!this.hasLoaded)
+    {
+        <h3>Loading laps...</h3>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr>
+                    @if (infoVM.ClassQualifyingData.RevealLapTimes)
+                    {
+                        <th class="visually-hidden"></th>
+                    }
+                    <th>Driver</th>
+                    <th>Registered Car</th>
+                    @if (infoVM.ClassQualifyingData.RevealLapTimes)
+                    {
+                        <th>Best Lap</th>
+                        <th>Gap</th>
+                    }
+                    <th>Valid</th>
+                    @if (!infoVM.ClassQualifyingData.RevealLapTimes)
+                    {
+                        <th>Total</th>
+                    }
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var driver in drivers)
+                {
+                <tr>
+                    @if (infoVM.ClassQualifyingData.RevealLapTimes)
+                    {
+                        <td class="race-number">@driver.Position</td>
+                    }
+                    <td class="@driver.DisplayClass"><span class="driver-number @driver.ClassString">@driver.RaceNumber</span>@driver.DriverName</td>
+                    <td>@driver.CarModel</td>
+                    @if (infoVM.ClassQualifyingData.RevealLapTimes)
+                    {
+                        <td class="lap-count">@driver.BestLapTime.ToString(@"m\:ss\.fff")</td>
+                        <td class="lap-count">@driver.Gap.ToString(@"\+s\.fff")</td>
+                    }
+                    <td class="lap-count">@driver.ValidLaps</td>
+                    @if (!infoVM.ClassQualifyingData.RevealLapTimes)
+                    {
+                        <td class="lap-count">@driver.TotalLaps</td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>

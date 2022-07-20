@@ -38,7 +38,7 @@
                 <div><strong>Start Time:</strong> @this.GetRaceDateTimeString(this.Race.StartingTime)</div>
             }
 
-            @if (this.Race.Results.Any())
+            @if (this.Race.Results?.Any() ?? false)
             {
                 <h5 class="mt-2">Results:</h5>
                 <div class="results-table">

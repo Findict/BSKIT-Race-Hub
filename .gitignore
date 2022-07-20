@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 RaceResultsBlazor.App/wwwroot/data
 RaceResultsBlazor.App/wwwroot/assets
+RaceResultsBlazor.App/wwwroot/servers

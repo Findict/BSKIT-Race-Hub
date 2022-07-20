@@ -17,10 +17,10 @@ namespace RaceResultsBlazor.Models.ViewModels
             this.Flag = race.Flag;
             this.Background = race.Background;
             this.TrackMap = race.TrackMap;
-            this.Results = race.Results.Where(r => (new[] { "1", "2", "3" }).Contains(r.Position)).OrderBy(r => r.Position).ToList();
-            this.Fastest = race.Results.FirstOrDefault(r => r.IsFastestLap);
+            this.Results = race.Results?.Where(r => (new[] { "1", "2", "3" }).Contains(r.Position)).OrderBy(r => r.Position).ToList();
+            this.Fastest = race.Results?.FirstOrDefault(r => r.IsFastestLap);
             this.FastestLapTime = race.FastestLapTime;
-            this.Pole = race.Results.FirstOrDefault(r => r.IsPolePosition);
+            this.Pole = race.Results?.FirstOrDefault(r => r.IsPolePosition);
             this.PoleLapTime = race.PoleLapTime;
         }
 

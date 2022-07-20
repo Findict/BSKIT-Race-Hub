@@ -16,6 +16,8 @@
 
         public ScoringMatrixDataModel[] ScoringMatrices { get; set; }
 
+        public ClassQualifyingDataModel ClassQualifyingData { get; set; }
+
         public int? MaxRacesToCount { get; set; }
 
         public SeriesSectionDataModel[] Sections { get; set; }
